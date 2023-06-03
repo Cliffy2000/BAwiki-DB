@@ -1,0 +1,155 @@
+.studentProfileObtainAndEquipmentWrapper {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    width: 100%;
+}
+
+.studentProfileObtainAndEquipmentWrapper .obtainAndEquipment {
+    width: 100%;
+    display: flex;
+}
+
+.studentProfileObtainAndEquipmentWrapper .obtainAndEquipment td {
+    vertical-align: top;
+}
+
+.studentProfileObtainAndEquipmentWrapper .obtainAndEquipmentTableRow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.studentProfileObtainAndEquipmentWrapper .obtain {
+    width: 225px;
+    flex: 1;
+}
+
+.studentProfileObtainAndEquipmentWrapper .titleContainer {
+    display: table;
+}
+
+.studentProfileObtainAndEquipmentWrapper .obtainTitle {
+    display: flex;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.studentProfileObtainAndEquipmentWrapper .implementationTitle {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipment {
+    width: 530px;
+    flex: 1;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentTitle {
+    display: flex;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentTable {
+    width: 500px;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentLeftCol {
+    width: 60px;
+    text-align: left;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentRightCol {
+    width: 60px;
+    text-align: right;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentTableCol,
+.studentProfileObtainAndEquipmentWrapper .equipmentTableColHeader {
+    width: 115px;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentTableCol {
+    height: 220px;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentFirstRow {
+    display: flex;
+    width: 530px;
+    justify-content: space-between;
+    text-align: center;
+    font-weight: bold;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentSecondRow {
+    display: flex;
+    width: 530px;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentIcon img {
+    height: 75px;
+    width: auto;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentName {
+    font-weight: bold;
+    height: 50px;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentTierSwapper {
+    font-weight: bold;
+    display: flex;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentCurrentTier {
+    display: inline;
+    flex: 1;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentTierSelector {
+    float: right;
+    display: inline;
+    text-align: right;
+    flex: 9;
+}
+
+.studentProfileObtainAndEquipmentWrapper .equipmentTierButton {
+    margin-left: 8.5px;
+    width: 15px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 599px) {
+    .studentProfileObtainAndEquipmentWrapper .obtainAndEquipment {
+        flex-direction: column;
+    }
+
+    .studentProfileObtainAndEquipmentWrapper .equipmentLeftCol {
+        display: none;
+    }
+
+    .studentProfileObtainAndEquipmentWrapper .equipmentRightCol {
+        display: none;
+    }
+
+    .studentProfileObtainAndEquipmentWrapper .equipment {
+        width: 100%;
+    }
+
+    .studentProfileObtainAndEquipmentWrapper .equipmentFirstRow {
+        width: 100%;
+    }
+
+    .studentProfileObtainAndEquipmentWrapper .equipmentSecondRow {
+        width: 100%;
+    }
+}

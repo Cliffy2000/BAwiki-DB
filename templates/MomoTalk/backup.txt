@@ -1,0 +1,127 @@
+
+function renderMessage2Row(text, withIcon = false) {
+    if (withIcon) {
+        return `
+            <div class="chatRowWithIcon" id="${rowId}">
+                <div class="chatRowIcon">
+                    <img src="${data[currentStudent]["img"]}">
+                </div>
+                <div class="chatRowTextCol">
+                    <div class="chatRowName">
+                        ${currentStudent}
+                    </div>
+                    <div class=chatRowText>
+                        ${text}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    else {
+        return `
+            <div class="chatRow" id=${rowId}>
+                <div class="chatRowIcon"></div>
+                <div class="chatRowTextCol">
+                    <div class=chatRowText>
+                        ${text}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+
+function renderTypingRow(withIcon = false, ) {
+    if (withIcon) {
+        return `
+            <div class="chatRowWithIcon typingRow" id=${rowId}>
+                <div class="chatRowIcon">
+                    <img src="${data[currentStudent]["img"]}">
+                </div>
+                <div class="chatRowTextCol">
+                    <div class="chatRowName">
+                        ${currentStudent}
+                    </div>
+                    <div class="chatTypingDots">
+                        <div class="typingDot1"></div>
+                        <div class="typingDot2"></div>
+                        <div class="typingDot3"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    else {
+        return `
+            <div class="chatRow typingRow" id=${rowId}>
+                <div class="chatRowIcon"></div>
+                <div class="chatTypingDotsCol">
+                    <div class="chatTypingDots">
+                        <div class="typingDot1"></div>
+                        <div class="typingDot2"></div>
+                        <div class="typingDot3"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+
+
+function renderMessageBlock(element, lines) {
+    // detects the later booleans in each line to determine if icons
+    // or images are needed
+
+    lines.forEach(line => {
+        console.log(line);
+        let icon = line[1];
+        element.queue(function (next) {
+            rowId += 1;
+            let typing = renderTypingRow(icon)
+            $(".chatScreen").append(typing);
+            $(`#${rowId}`).fadeIn(1000, function () {
+                $(this).delay(20000).fadeOut(1000, function () {
+                    $(this).remove();
+                    next()
+                })
+            });
+        });
+    });
+
+    element.dequeue();
+}
+
+
+function queueAnimations(i, lines) {
+    console.log(i);
+    // base case: if we've gone past the last index, return
+    if (i >= lines.length) {
+        return;
+    }
+
+    let line = lines[i];
+    let icon = line[1];
+    element = $(".chatScreen");
+
+    element.queue(function (next) {
+        rowId += 1;
+        let typing = renderTypingRow(icon);
+
+        $(".chatScreen").animate({opacity: '1'}, 500, function() {
+            $(this).append(typing);
+            $(`#${rowId}`).delay(1000).fadeOut(200, function () {
+                $(this).remove();
+                rowId += 1;
+                $(`.chatScreen`).animate({ opacity: '1' }, 500, function () {
+                    $(".chatScreen").append(renderMessageRow(line[0], icon)).delay(500);
+                    queueAnimations(i + 1, lines);
+                    next();
+                });
+            });
+        })
+    });
+}

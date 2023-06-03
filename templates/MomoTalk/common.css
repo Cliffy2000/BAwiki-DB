@@ -1,0 +1,343 @@
+@font-face {
+    font-family: 'AlibabaPuHuiTi';
+    src: url('https://cliffy2000.github.io/PuHuiTi-v2/AlibabaPuHuiTi-2-55-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    width: 390px;
+    height: 844px;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+p {
+    margin: 0;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    margin: 0;
+    background-color: #FA94A6;
+    font-size: 17px;
+    font-family: "AlibabaPuHuiTi", sans-serif;
+}
+
+.appHeader {
+    height: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.appHeader p {
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 1.2px;
+}
+
+.returnButton {
+    position: absolute;
+    top: 30px;
+    left: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    display: none;
+    margin: 0;
+}
+
+.mainWindow {
+    position: relative;
+    height: calc(100% - 90px - 80px);
+    background-color: #8c8c8c;
+    overflow: hidden;
+}
+
+.chatPreviewList {
+    /* removes fixed header and footer heights from full height */
+    display: grid;
+    grid-row-gap: 1px;
+}
+
+.chatPreview {
+    display: flex;
+    width: 100%;
+    background-color: #F4F7F8;
+    height: 100px;
+    overflow: hidden;
+}
+
+.previewImg {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.previewImg img {
+    border-radius: 50%;
+    height: 80%;
+}
+
+.previewText {
+    flex: 2;
+    padding: 20px 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.previewName {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.previewMessage {
+    overflow: hidden;
+}
+
+.appFooter {
+    height: 80px;
+    background-color: #4c5b6f;
+    border-radius: 0 0 30px 30px;
+    display: flex;
+}
+
+.chat, .contacts {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.chat,.contacts p {
+    color: white;
+    font-size: 18px;
+    letter-spacing: 0.25px;
+}
+
+.chat {
+    background-color: #68788F;
+    border-radius: 0 0 0 30px;
+}
+
+.contacts {
+    border-radius: 0 0 30px 0;
+}
+
+.chatScreen {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    background-color: #F4F7F8;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.chatRowWithIcon {
+    display: flex;
+    width: 100%;
+    height: 65px;
+    margin-top: 10px;
+}
+
+.chatRow {
+    display: flex;
+    width: 100%;
+    height: 50px;
+}
+
+.chatRowIcon {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatRowIcon img {
+    height: 90%;
+    border-radius: 50%;
+}
+
+.chatRowTextCol {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 15px;
+}
+
+.chatRowName {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.chatRowText {
+    border-radius: 7px;
+    color: white;
+    background-color: #4C516D;
+    padding: 8px;
+    line-height: 24px;
+    max-width: 100%;
+    position: relative;
+    margin-right: auto;
+}
+
+.chatRowText:before {
+    border-color: transparent #4C516D transparent transparent;
+    border-style: solid;
+    border-width: 6px 6px 6px 0;
+    content: "";
+    display: block;
+    height: 0;
+    left: -4px;
+    position: absolute;
+    top: 9px;
+    width: 0;
+}
+
+
+.chatTypingDotsCol {
+    flex: 4;
+    display: flex;
+    padding-left: 15px;
+    align-items: center;
+}
+
+.chatTypingDots {
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+    background-color: #4C516D;
+    padding: 8px 12px;
+    height: 24px;
+    position: relative;
+    margin-right: auto;
+}
+
+.chatTypingDots:before {
+    border-color: transparent #4C516D transparent transparent;
+    border-style: solid;
+    border-width: 6px 6px 6px 0;
+    content: "";
+    display: block;
+    height: 0;
+    left: -4px;
+    position: absolute;
+    top: 9px;
+    width: 0;
+}
+
+.typingDot1, .typingDot2, .typingDot3 {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin: 0 3px;
+    animation: blink 0.75s infinite;
+}
+
+.typingDot1 {
+    background-color: white;
+    animation-delay: 0s;
+}
+
+.typingDot2 {
+    background-color: white;
+    animation-delay: 0.25s;
+}
+
+.typingDot3 {
+    background-color: white;
+    animation-delay: 0.5s;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.optionsRow {
+    float: right;
+    min-width: 45%;
+    color: #60687a;
+    box-sizing: border-box;
+    background-color: #E0ECF3;
+    border-radius: 7px;
+    border: 1px solid #D3D8DE;
+    padding: 7px;
+    padding-top: 5px;
+    box-sizing: border-box;
+}
+
+.optionsHeaderText {
+    position: relative;
+    border-bottom: 1px solid #D3D8DE;
+    padding-left: 7px;
+}
+
+.optionsHeaderText:before {
+    position: absolute;
+    content: "";
+    width: 3px;
+    height: 60%;
+    top: 20%;
+    left: 0;
+    background-color: #4b90d5;
+}
+
+.optionsHeaderText p {
+    padding-bottom: 3px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.optionSelector {
+    margin: 5px 0;
+}
+
+.option {
+    border: 1px solid #D3D8DE;
+    border-radius: 8px;
+    padding: 4px 7px;
+    text-align: center;
+    box-shadow: 0px 2px 3px -2px #444444;
+    margin-bottom: 5px;
+    background-color: #fbfbff;
+}
+
+.responseRow {
+    float: right;
+    min-width: 45%;
+    color: #60687a;
+    box-sizing: border-box;
+    border-radius: 7px;
+    color: white;
+    background-color: #3F76BA;
+    padding: 8px;
+    line-height: 24px;
+    max-width: 100%;
+    position: relative;
+    margin-right: 5px;
+}
+
+.responseRowText:before {
+    border-color: transparent transparent transparent #3F76BA;
+    border-style: solid;
+    border-width: 6px 0px 6px 6px;
+    content: "";
+    display: block;
+    height: 0;
+    right: -4.5px;
+    position: absolute;
+    top: 9px;
+    width: 0;
+}

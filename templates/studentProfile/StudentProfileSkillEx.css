@@ -1,0 +1,198 @@
+.studentProfileSkillExWrapper .skillTitle {
+    display: flex;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.studentProfileSkillExWrapper .skillType {
+    padding: 0px 3px;
+    border: 2px solid black;
+    display: inline-block;
+}
+
+.studentProfileSkillExWrapper .skillNameContainer {
+    position: relative;
+    margin-left: 5px;
+    padding-top: 2px;
+    border-bottom: 1px solid black;
+}
+
+.studentProfileSkillExWrapper .skillCostContainer {
+    width: 100px;
+    display: inline;
+}
+
+.studentProfileSkillExWrapper .skillCost {
+    display: inline;
+}
+
+.studentProfileSkillExWrapper .skillIconContainer img {
+    display: inline-block;
+    height: 75px;
+    width: auto;
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+
+.studentProfileSkillExWrapper .skillIconAndDescription {
+    display: flex;
+}
+
+.studentProfileSkillExWrapper .skillDescription {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 25px;
+    width: 285px;
+}
+
+.studentProfileSkillExWrapper .skillText {
+    color: black;
+}
+
+.studentProfileSkillExWrapper .skillCostAndLevel {
+    display: flex;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.studentProfileSkillExWrapper .skillLvSwapper {
+    display: flex;
+    width: 100%;
+}
+
+.studentProfileSkillExWrapper .skillCurrentLv {
+    display: inline;
+    flex: 1;
+}
+
+.studentProfileSkillExWrapper .skillLvSelector {
+    display: inline-block;
+    flex: 2;
+    text-align: right;
+}
+
+.studentProfileSkillExWrapper .skillLvButton {
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 8.5px;
+    width: 15px;
+}
+
+.studentProfileSkillExWrapper .skillMaterials {
+    width: 100%;
+}
+
+.studentProfileSkillExWrapper .skillMaterialTitleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.studentProfileSkillExWrapper .skillMaterialTitle {
+    margin-right: 10px;
+}
+
+.studentProfileSkillExWrapper .skillMaterialButton {
+    float: right;
+    display: inline-flex;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+}
+
+.studentProfileSkillExWrapper .skillMaterialTable {
+    width: 100%;
+    display: none;
+}
+
+.studentProfileSkillExWrapper .skillMaterialCount {
+    font-weight: bold;
+}
+
+.studentProfileSkillExWrapper .skillMaterialCount p {
+    padding: 5px 0px 10px 15px;
+    width: 72px;
+}
+
+.studentProfileSkillExWrapper .skillMaterialElementCount {
+    float: left;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.studentProfileSkillExWrapper .skillCreditCol {
+    text-align: right;
+    font-weight: bold;
+    align-items: center;
+    height: 60px;
+}
+
+.studentProfileSkillExWrapper .skillCredit {
+    display: flex;
+    float: right;
+}
+
+.studentProfileSkillExWrapper .credit img {
+    height: 15px;
+    width: auto;
+    display: inline-block;
+}
+
+.studentProfileSkillExWrapper .creditText {
+    display: inline;
+    padding-top: 5px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.studentProfileSkillExWrapper .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+.studentProfileSkillExWrapper .grid-item {
+    text-align: center;
+}
+
+.studentProfileSkillExWrapper .grid-container td {
+    width: 25%;
+}
+
+.studentProfileSkillExWrapper .grid-container img {
+    width: 35px;
+    height: auto;
+    display: inline-block;
+    margin: 0;
+}
+
+.studentProfileSkillExWrapper .grid-container .skillMaterialItem {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+}
+
+.studentProfileSkillExWrapper .grid-container .skillMaterialItem p {
+    font-size: 10px;
+}
+
+@media screen and (max-width: 599px) {
+    .studentProfileSkillExWrappe {
+        width: calc(100% - 10px);
+    }
+
+    .skillDescription {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .studentProfileSkillExWrappe {
+        width: 390px;
+    }
+}

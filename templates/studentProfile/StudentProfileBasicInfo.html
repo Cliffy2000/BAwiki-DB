@@ -1,0 +1,107 @@
+<div class="loader">StudentProfileBasicInfo.css</div>
+<div class="loader">StudentProfileBasicInfo.js</div>
+<div class="studentProfileBasicInfoWrapper">
+    <div class="varSecondary" style="display: none">{{#var: 差分 | {{#if: {{{差分|}}} | {{{差分}}} | false }} }}</div>
+    <div class="varPoster" style="display: none">{{#var: 立绘2 | {{#if: {{{立绘2|}}} | {{{立绘2}}} | Peroerror }} }}</div>
+    <div class="haloColor" style="display: none">00FF00</div>
+    <div class="basicInfoTable">
+        <div class="nameContainer">
+            <div class="romajiNameContainer">
+                <div class="romajiNameText">
+                    <div class="romajiName">
+                        <p>{{{姓}}}<br>{{{名}}}</p>
+                    </div>
+                    <div class="romajiStar">
+                        <p>{{{星级数}}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="nameCVContainer">
+                <div class="nameCVText">
+                    <div class="name">
+                        <p><b>{{{中文名}}}</b></p>
+                    </div>
+                    <div>
+                        <p><b>声优：{{{声优}}}<br>设计/原画:{{{设计原画}}}</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="posterElement" style="grid-row: span 2;">
+            <div class="posterModule">
+                <div class="poster portrait">[[File:{{{立绘}}}.png|link=]]</div>
+                <div class="poster portraitSecondary">[[File:{{{立绘2}}}.png|link=]]</div>
+                <div class="poster lobby">[[File:{{{回忆大厅}}}.png|link=]]</div>
+            </div>
+            <div class="posterSwapperContainer">
+                <div class="posterSwapperButton portraitChangeButton" style="display: none">切换立绘</div>
+                <div class="posterSwapperButton portraitButton"><b>立绘</b></div>
+                <div class="posterSwapperButton lobbyButton"><b>回忆大厅</b></div>
+                <div class="posterSwapperButton live2DButton"><b>动态壁纸</b></div>
+            </div>
+        </div>
+        <div class="record">
+            <div class="recordTitle">
+                <p><b>档案</b></p>
+            </div>
+            <div class="recordContent">
+                <div class="recordEntry">
+                    <div class="recordCategory">
+                        <p><b>所属</b></p>
+                    </div>
+                    <div class="recordValue">
+                        <p><b>{{{所属学院}}}</b></p>
+                    </div>
+                </div>
+                <div class="recordEntry">
+                    <div class="recordCategory">
+                        <p><b>社团</b></p>
+                    </div>
+                    <div class="recordValue">
+                        <p><b>{{{社团}}}</b></p>
+                    </div>
+                </div>
+                <div class="recordEntry">
+                    <div class="recordCategory">
+                        <p><b>生日</b></p>
+                    </div>
+                    <div class="recordValue">
+                        <p><b>{{{生日}}}</b></p>
+                    </div>
+                </div>
+                <div class="recordEntry">
+                    <div class="recordCategory">
+                        <p><b>学年</b></p>
+                    </div>
+                    <div class="recordValue">
+                        <p><b>{{{学年}}}</b></p>
+                    </div>
+                </div>
+                <div class="recordEntry">
+                    <div class="recordCategory">
+                        <p><b>年龄</b></p>
+                    </div>
+                    <div class="recordValue">
+                        <p><b>{{{年龄}}}</b></p>
+                    </div>
+                </div>
+                <div class="recordEntry">
+                    <div class="recordCategory">
+                        <p><b>身高</b></p>
+                    </div>
+                    <div class="recordValue">
+                        <p><b>{{{身高}}}</b></p>
+                    </div>
+                </div>
+                <div class="recordEntry">
+                    <div class="recordCategory">
+                        <p><b>兴趣</b></p>
+                    </div>
+                    <div class="recordValue">
+                        <p><b>{{{兴趣}}}</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

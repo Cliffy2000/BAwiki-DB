@@ -1,0 +1,199 @@
+.studentProfileSkill1Wrapper .skillTitle {
+    display: flex;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.studentProfileSkill1Wrapper .skillType {
+    padding: 0px 3px;
+    border: 2px solid black;
+    display: inline-block;
+}
+
+.studentProfileSkill1Wrapper .skillNameContainer {
+    position: relative;
+    margin-left: 5px;
+    padding-top: 2px;
+    border-bottom: 1px solid black;
+}
+
+.studentProfileSkill1Wrapper .skillCostContainer {
+    width: 100px;
+    display: inline;
+}
+
+.studentProfileSkill1Wrapper .skillCost {
+    display: inline;
+}
+
+.studentProfileSkill1Wrapper .skillIconContainer img {
+    display: inline-block;
+    height: 75px;
+    width: auto;
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+
+.studentProfileSkill1Wrapper .skillIconAndDescription {
+    display: flex;
+}
+
+.studentProfileSkill1Wrapper .skillDescription {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 25px;
+    width: 285px;
+}
+
+.studentProfileSkill1Wrapper .skillText {
+    color: black;
+}
+
+.studentProfileSkill1Wrapper .skillCostAndLevel {
+    display: flex;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.studentProfileSkill1Wrapper .skillLvSwapper {
+    display: flex;
+    width: 100%;
+}
+
+.studentProfileSkill1Wrapper .skillCurrentLv {
+    display: inline;
+    flex: 1;
+}
+
+.studentProfileSkill1Wrapper .skillLvSelector {
+    display: inline-block;
+    flex: 10;
+    text-align: right;
+}
+
+.studentProfileSkill1Wrapper .skillLvButton {
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 8.5px;
+    width: 15px;
+}
+
+.studentProfileSkill1Wrapper .skillMaterials {
+    width: 100%;
+}
+
+.studentProfileSkill1Wrapper .skillMaterialTitleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.studentProfileSkill1Wrapper .skillMaterialTitle {
+    margin-right: 10px;
+}
+
+.studentProfileSkill1Wrapper .skillMaterialButton {
+    float: right;
+    position: relative;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.studentProfileSkill1Wrapper .skillMaterialTable {
+    width: 100%;
+    display: none;
+}
+
+.studentProfileSkill1Wrapper .skillMaterialCount {
+    font-weight: bold;
+}
+
+.studentProfileSkill1Wrapper .skillMaterialCount p {
+    padding: 5px 0px 10px 15px;
+    width: 72px;
+}
+
+.studentProfileSkill1Wrapper .skillMaterialElementCount {
+    float: left;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.studentProfileSkill1Wrapper .skillCreditCol {
+    text-align: right;
+    font-weight: bold;
+    align-items: center;
+    height: 60px;
+}
+
+.studentProfileSkill1Wrapper .skillCredit {
+    display: flex;
+    float: right;
+}
+
+.studentProfileSkill1Wrapper .credit img {
+    height: 15px;
+    width: auto;
+    display: inline-block;
+}
+
+.studentProfileSkill1Wrapper .creditText {
+    display: inline;
+    padding-top: 5px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.studentProfileSkill1Wrapper .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+.studentProfileSkill1Wrapper .grid-item {
+    text-align: center;
+}
+
+.studentProfileSkill1Wrapper .grid-container td {
+    width: 25%;
+}
+
+.studentProfileSkill1Wrapper .grid-container img {
+    width: 35px;
+    height: auto;
+    display: inline-block;
+    margin: 0;
+}
+
+.studentProfileSkill1Wrapper .grid-container .skillMaterialItem {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+}
+
+.studentProfileSkill1Wrapper .grid-container .skillMaterialItem p {
+    font-size: 10px;
+}
+
+@media screen and (max-width: 599px) {
+    .studentProfileSkill1Wrappe {
+        width: calc(100% - 10px);
+    }
+
+    .skillDescription {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .studentProfileSkill1Wrappe {
+        width: 390px;
+    }
+}

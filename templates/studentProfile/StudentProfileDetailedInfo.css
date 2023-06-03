@@ -1,0 +1,191 @@
+.studentProfileDetailedInfoWrapper {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.studentProfileDetailedInfoWrapper .detailedInfoTable {
+    width: 100%;
+    display: grid;
+    grid-gap: 37.5px;
+    grid-template-columns: 225px 140px 360px;
+}
+
+.studentProfileDetailedInfoWrapper .introductionText p {
+    margin-bottom: 10px;
+}
+
+.studentProfileDetailedInfoWrapper .introductionTitle {
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    width: 100%;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.studentProfileDetailedInfoWrapper .titleContainer {
+    display: table;
+}
+
+.studentProfileDetailedInfoWrapper .propertiesTitle {
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.studentProfileDetailedInfoWrapper .basicProperties {
+    margin-bottom: 15px;
+}
+
+.studentProfileDetailedInfoWrapper .basicProperties p {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.studentProfileDetailedInfoWrapper .propertyRow {
+    display: flex;
+}
+
+.studentProfileDetailedInfoWrapper #role {
+    display: inline-block;
+}
+
+.studentProfileDetailedInfoWrapper #roleIcon {
+    display: inline-block;
+}
+
+.studentProfileDetailedInfoWrapper #roleIcon img {
+    margin-top: 4px;
+    margin-left: 5px;
+    height: 14px;
+    width: auto;
+}
+
+.studentProfileDetailedInfoWrapper .areaProperties p {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.studentProfileDetailedInfoWrapper .areaPropertyEntry {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.studentProfileDetailedInfoWrapper .areaText {
+    display: inline;
+}
+
+.studentProfileDetailedInfoWrapper .areaEnhanceText {
+    display: inline;
+    margin-right: 20px;
+    width: 80px;
+}
+
+.studentProfileDetailedInfoWrapper .areaGrade {
+    display: inline;
+    width: 20px;
+    margin-left: 5px;
+}
+
+.studentProfileDetailedInfoWrapper .areaLine {
+    display: inline-block;
+    position: relative;
+    width: 45px;
+}
+
+.studentProfileDetailedInfoWrapper .areaLine::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    width: 25px;
+    height: 1px;
+    background-color: black;
+}
+
+.studentProfileDetailedInfoWrapper .areaIcon,
+.studentProfileDetailedInfoWrapper .areaGradeIcon {
+    display: inline-block;
+}
+
+.studentProfileDetailedInfoWrapper .areaIcon img {
+    height: 24px;
+    width: auto;
+}
+
+.studentProfileDetailedInfoWrapper .areaGradeIcon img {
+    height: 16px;
+    width: auto;
+}
+
+.studentProfileDetailedInfoWrapper .weaponTitle {
+    display: flex;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.studentProfileDetailedInfoWrapper .weaponType {
+    padding: 0px 3px;
+    border: 2px solid black;
+    display: inline-block;
+}
+
+.studentProfileDetailedInfoWrapper .weaponNameContainer {
+    position: relative;
+    margin-left: 5px;
+    padding-top: 2px;
+    border-bottom: 1px solid black;
+}
+
+.studentProfileDetailedInfoWrapper .weaponImg img {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.studentProfileDetailedInfoWrapper .weaponStarEntry {
+    display: flex;
+    position: relative;
+}
+
+.studentProfileDetailedInfoWrapper .weaponStarEntry p {
+    display: inline;
+}
+
+.studentProfileDetailedInfoWrapper .weaponStarEntry::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 35px;
+    width: 25px;
+    height: 0.02rem;
+    background-color: black;
+}
+
+.studentProfileDetailedInfoWrapper .weaponStars {
+    margin-right: 55px;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 599px) {
+    .studentProfileDetailedInfoWrapper .detailedInfoTable {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 719px) {
+    .studentProfileDetailedInfoWrapper .detailedInfoTable {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (min-width: 720px) and (max-width: 930px) {
+    .studentProfileDetailedInfoWrapper .detailedInfoTable {
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 50px;
+    }
+}
