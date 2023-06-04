@@ -58,6 +58,7 @@ p {
     height: calc(100% - 90px - 80px);
     background-color: #8c8c8c;
     overflow: hidden;
+    overflow-y: auto;
 }
 
 .chatPreviewList {
@@ -120,6 +121,7 @@ p {
     color: white;
     font-size: 18px;
     letter-spacing: 0.25px;
+    padding-top: 20px;
 }
 
 .chat {
@@ -136,7 +138,7 @@ p {
     top: 0;
     left: 100%;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background-color: #F4F7F8;
     padding: 10px;
     box-sizing: border-box;
@@ -145,25 +147,28 @@ p {
 .chatRowWithIcon {
     display: flex;
     width: 100%;
-    height: 65px;
+    min-height: 65px;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .chatRow {
     display: flex;
     width: 100%;
-    height: 50px;
+    min-height: 50px;
+    margin-bottom: 10px;
 }
 
 .chatRowIcon {
     flex: 1;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
 .chatRowIcon img {
     height: 90%;
+    max-height: 58px;
     border-radius: 50%;
 }
 
@@ -186,7 +191,7 @@ p {
     background-color: #4C516D;
     padding: 8px;
     line-height: 24px;
-    max-width: 100%;
+    max-width: 80%;
     position: relative;
     margin-right: auto;
 }
@@ -204,6 +209,24 @@ p {
     width: 0;
 }
 
+.chatRowImg {
+    width: 170px;
+    height: 170px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatRowImgWrapper {
+    width: 95%;
+    height: 95%;
+}
+
+.chatRowImgWrapper img {
+    width: 100%;
+}
 
 .chatTypingDotsCol {
     flex: 4;
@@ -266,8 +289,14 @@ p {
 }
 
 .optionsRow {
-    float: right;
+    display: inline-flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.optionsRowContent {
     min-width: 45%;
+    max-width: 85%;
     color: #60687a;
     box-sizing: border-box;
     background-color: #E0ECF3;
@@ -276,6 +305,9 @@ p {
     padding: 7px;
     padding-top: 5px;
     box-sizing: border-box;
+    display: inline-flex;
+    justify-content: flex-end;
+    flex-direction: column;
 }
 
 .optionsHeaderText {
@@ -301,7 +333,7 @@ p {
 }
 
 .optionSelector {
-    margin: 5px 0;
+    margin-top: 5px;
 }
 
 .option {
@@ -315,8 +347,13 @@ p {
 }
 
 .responseRow {
-    float: right;
-    min-width: 45%;
+    display: inline-flex;
+    justify-content: flex-end;
+    width: 100%;
+    position: relative;
+}
+
+.responseRowContent {
     color: #60687a;
     box-sizing: border-box;
     border-radius: 7px;
@@ -324,19 +361,20 @@ p {
     background-color: #3F76BA;
     padding: 8px;
     line-height: 24px;
-    max-width: 100%;
-    position: relative;
+    max-width: 85%;
     margin-right: 5px;
+    display: inline-flex;
+    justify-content: flex-end;
 }
 
-.responseRowText:before {
+.responseRow:before {
     border-color: transparent transparent transparent #3F76BA;
     border-style: solid;
     border-width: 6px 0px 6px 6px;
     content: "";
     display: block;
     height: 0;
-    right: -4.5px;
+    right: 0.5px;
     position: absolute;
     top: 9px;
     width: 0;
