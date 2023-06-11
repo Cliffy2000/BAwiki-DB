@@ -59,6 +59,12 @@ p {
     background-color: #8c8c8c;
     overflow: hidden;
     overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE, Edge */
+}
+
+.mainWindow::-webkit-scrollbar {
+    display: none;
 }
 
 .chatPreviewList {
@@ -141,6 +147,7 @@ p {
     min-height: 100%;
     background-color: #F4F7F8;
     padding: 10px;
+    padding-right: 12px;
     box-sizing: border-box;
 }
 

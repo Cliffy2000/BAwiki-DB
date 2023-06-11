@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'AlibabaPuHuiTi';
+    src: url('https://cliffy2000.github.io/PuHuiTi-v2/AlibabaPuHuiTi-2-55-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    font-size: 14px;
+    font-family: "AlibabaPuHuiTi", sans-serif;
+}
+
+.previewData {
+    flex: 3;
+}
+
+.previewRow {
+    width: 100%;
+    display: flex;
+}
+
+.studentPreview {
+    flex: 2;
+    margin: 10px;
+    display: flex;
+}
+
+.senseiPreview {
+    flex: 1;
+    margin: 10px;
+    display: flex;
+}
+
+.inputWindow {
+    flex: 1;
+}
+
+.studentPreviewIndex {
+    flex: 1;
+    text-align: center;
+}
+
+.studentPreviewText {
+    flex: 10;
+}
+
+.studentLine {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.studentLineText {
+    margin: 0;
+    background-color: #4c5b6f;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    width: 85%;
+    flex: 8;
+    max-width: 85%;
+}
+
+.studentLineIcon {
+    flex: 1;
+    background-color: #4c5b6f;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.studentPreviewNext {
+    flex: 1;
+    text-align: center;
+}
+
+.senseiPreviewIndex {
+    flex: 1;
+    text-align: center;
+}
+
+.senseiPreviewText {
+    flex: 6;
+}
+
+.senseiLine {
+    margin-bottom: 5px;
+    flex: 5;
+}
+
+.senseiLine div {
+    margin: 0;
+    background-color: #E0ECF3;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.senseiPreviewNext {
+    flex: 1;
+    text-align: center;
+}
+
+.index {
+    font-size: 17px;
+    font-weight: bold;
+    color: #003153;
+}
