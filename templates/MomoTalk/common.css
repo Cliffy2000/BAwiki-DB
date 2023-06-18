@@ -7,7 +7,7 @@
 
 html, body {
     width: 390px;
-    height: 844px;
+    height: 754px;
     margin: 0;
     padding: 0;
     background-color: black;
@@ -117,13 +117,14 @@ p {
     display: flex;
 }
 
-.chat, .contacts {
+.chat, .diy {
     flex: 1;
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
 
-.chat,.contacts p {
+.chat,.diy p {
     color: white;
     font-size: 18px;
     letter-spacing: 0.25px;
@@ -135,7 +136,7 @@ p {
     border-radius: 0 0 0 30px;
 }
 
-.contacts {
+.diy {
     border-radius: 0 0 30px 0;
 }
 
@@ -385,4 +386,449 @@ p {
     position: absolute;
     top: 9px;
     width: 0;
+}
+
+.diyHomePage {
+    width: 100%;
+    height: 100%;
+    background-color: #F4F7F8;
+    display: none;
+}
+
+.diyChatList {
+    width: 100%;
+    height: 82.5%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.diyChatListHeader {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.diyChatListHeader p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 5%;
+    margin-top: 2px;
+}
+
+.diyChats {
+    height: calc(100% - 40px);
+}
+
+.diyDirectMessagesHeader {
+    background-color: #E7F1F7;
+    border-top: 1px solid #D6E2E9;
+    border-bottom: 1px solid #D6E2E9;
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.diyDirectMessagesHeader p {
+    font-size: 14px;
+    font-weight: bold;
+    color: #404349;
+    margin-left: 30px;
+}
+
+.diyDirectMessagesHeader p::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 3px;
+    height: 15px;
+    background-color: #55BAF9;
+    left: 18px;
+    top: 7px;
+}
+
+.diyGroupChatsHeader {
+    background-color: #E7F1F7;
+    border-top: 1px solid #D6E2E9;
+    border-bottom: 1px solid #D6E2E9;
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.diyGroupChatsHeader p {
+    font-size: 14px;
+    font-weight: bold;
+    color: #404349;
+    margin-left: 30px;
+}
+
+.diyGroupChatsHeader p::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 3px;
+    height: 15px;
+    background-color: #55BAF9;
+    left: 18px;
+    top: 7px;
+}
+
+.diyButtonsPanel {
+    width: 100%;
+    height: 17.5%;
+    background-color: #EEEEEE;
+}
+
+.diyButtonsHeader {
+    height: 35px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.diyButtonsHeader p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 5%;
+    margin-top: 4px;
+}
+
+.diyButtonsWrapper {
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 35px);
+}
+
+.diyButtonsCreate {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+}
+
+.diyBasicMode, .diyAdvancedMode, .diyImportButton {
+    background-color: #D8E8EF;
+    color: #404349;
+    font-weight: bold;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+    border-radius: 5px;
+    margin-top: 5%;
+    cursor: pointer;
+}
+
+.diyImportButton {
+    margin-right: 5%;
+}
+
+.diyImport {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.studentSelectPanel {
+    position: absolute;
+    top: 2.5%;
+    left: 2.5%;
+    width: 95%;
+    height: 95%;
+    background-color: #003153;
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+}
+
+.studentSelectPanelHeader {
+    height: 8%;
+    display: flex;
+}
+
+.studentSelectPanelHeaderText {
+    flex: 1;
+}
+
+.studentSelectIconGrid {
+    height: 90%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 10px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.studentSelectIconGrid::-webkit-scrollbar {
+    display: none;
+}
+
+.studentSelectPanel img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.diyBasicScreen {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.diyBasicDataScreen {
+    height: 87.5%;
+    padding-top: 10px;
+    background-color: white;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.diyBasicDataScreen::-webkit-scrollbar {
+    display: none;
+}
+
+.diyBasicInputBar {
+    height: 12.5%;
+    background-color: #E5E5E5;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.diyBasicInputIcon img {
+    height: 55%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.diyBasicInputWindow {
+    position: relative;
+}
+
+.diyBasicInputWindow:before {
+    border-color: transparent white transparent transparent;
+    border-style: solid;
+    border-width: 6px 8px 6px 0;
+    content: "";
+    display: block;
+    height: 0;
+    left: -8px;
+    position: absolute;
+    top: 30%;
+    width: 0;
+}
+
+.diyBasicInput {
+    border: none;
+    height: 50%;
+    border-radius: 5px;
+}
+
+.diyBasicInsertBar {
+    height: 12.5%;
+    background-color: #E5E5E5;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.diyBasicInsertIcon img {
+    height: 55%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.diyBasicInsertWindow {
+    position: relative;
+}
+
+.diyBasicInsertWindow:before {
+    border-color: transparent white transparent transparent;
+    border-style: solid;
+    border-width: 6px 8px 6px 0;
+    content: "";
+    display: block;
+    height: 0;
+    left: -8px;
+    position: absolute;
+    top: 30%;
+    width: 0;
+}
+
+.diyBasicInsert {
+    border: none;
+    height: 50%;
+    border-radius: 5px;
+}
+
+.diyBasicEditBar {
+    height: 12.5%;
+    background-color: #E5E5E5;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.diyBasicEditIcon img {
+    height: 55%;
+    border-radius: 50%;
+    opacity: 0.75;
+}
+
+.diyBasicEditWindow {
+    position: relative;
+}
+
+.diyBasicEditWindow:before {
+    border-color: transparent white transparent transparent;
+    border-style: solid;
+    border-width: 6px 8px 6px 0;
+    content: "";
+    display: block;
+    height: 0;
+    left: -8px;
+    position: absolute;
+    top: 30%;
+    width: 0;
+}
+
+.diyBasicEdit {
+    border: none;
+    height: 50%;
+    border-radius: 5px;
+}
+
+.diyBasicButtonSmall, .diyBasicButtonLarge {
+    width: 17.5%;
+    background-color: #90DBFA;
+    color: #003153;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.diyBasicButtonLarge {
+    width: 40%;
+}
+
+.diyBasicDataIconRow {
+    display: flex;
+    width: 100%;
+    min-height: 70px;
+}
+
+.diyBasicDataRow {
+    display: flex;
+    width: 100%;
+    min-height: 45px;
+}
+
+.diyBasicStudentRow {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+}
+
+.diyBasicStudentRowIcon {
+    flex: 1;
+    display: flex;
+}
+
+.diyBasicStudentRowIcon img {
+    height: 55px;
+    border-radius: 50%;
+}
+
+.diyStudentLineName {
+    color: #003153;
+}
+
+.diyBasicStudentRowLine {
+    flex: 4;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.diyStudentLineText, .diyStudentLineTextPointed {
+    border-radius: 7px;
+    color: white;
+    background-color: #4C516D;
+    padding: 8px;
+    line-height: 24px;
+    max-width: 80%;
+    position: relative;
+}
+
+.diyStudentLineTextPointed:before {
+    border-color: transparent #4C516D transparent transparent;
+    border-style: solid;
+    border-width: 6px 6px 6px 0;
+    content: "";
+    display: block;
+    height: 0;
+    left: -4px;
+    position: absolute;
+    top: 9px;
+    width: 0;
+}
+
+.diyBasicUserRow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.diyUserLineText, .diyUserLineTextPointed {
+    border-radius: 7px;
+    color: white;
+    background-color: #3F76BA;
+    padding: 8px;
+    line-height: 24px;
+    max-width: 80%;
+    position: relative;
+    margin-right: 15px;
+}
+
+.diyUserLineTextPointed:before {
+    border-color: transparent transparent transparent #3F76BA;
+    border-style: solid;
+    border-width: 6px 0px 6px 6px;
+    content: "";
+    display: block;
+    height: 0;
+    right: -4.5px;
+    position: absolute;
+    top: 9px;
+    width: 0;
+}
+
+.diyBasicButtonBar {
+    height: 12.5%;
+    background-color: #E5E5E5;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    align-items: center;
+    justify-content: space-evenly;
 }
