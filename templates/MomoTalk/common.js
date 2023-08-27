@@ -1,4 +1,5 @@
 var currentStudent;
+var currentAffection = "1";
 var messageBlockIndex = 0;
 var responseBlockIndex = 0;
 var rowId = 0;
@@ -14,13 +15,62 @@ var momotalkStudentSelect = false;      // student selection page in diy
 
 // ================= momotalk parameters
 var momotalkCurrectPerson = "student";
-var momotalkCurrentChatNum = 1;
 var momotalkBasicLineIndex = null;
 var momotalkBasicLineDataIndex = null;
+var momotalkCurrentType = 'affection1';  // affection/custom, determines which data to expand for blocks
+var momotalkCurrentBlockIndex = 0;
 // var momotalkBasicCurrentMode; // send, lineSelect, insert, edit
+var diyAdvancedStudentList = [];
 
 
 $(function () {
+    // full screen
+    $(".appHeader").on("click", function () {
+        var element = $(".app")[0];
+        if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+            // if (element.requestFullscreen) {
+            //     $(this).html(`<p>1</p>`);
+            //     element.requestFullscreen();
+            // } else if (element.mozRequestFullScreen) {
+            //     $(this).html(`<p>2</p>`);
+            //     element.mozRequestFullScreen();
+            // } else if (element.webkitRequestFullscreen) {
+            //     $(this).html(`<p>3</p>`);
+            //     element.webkitRequestFullscreen();
+            // } else if (element.msRequestFullscreen) {
+            //     $(this).html(`<p>4</p>`);
+            //     element.msRequestFullscreen();
+            // } else {
+            //     $(this).html(`<p>5</p>`);
+            //     // mobile
+            //     $('div').removeClass('on-top');
+            //     element.addClass('on-top');
+            //     $('body').addClass('hide-all');
+            // }
+            $(this).html(`<p>5</p>`);
+            $('div').removeClass('on-top');
+            $(".app").addClass('on-top');
+            $('body').addClass('hide-all');
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            } else {
+                // Reset styles after exiting pseudo-fullscreen
+                element.style.position = 'static';
+                element.style.width = 'auto';
+                element.style.height = 'auto';
+                element.style.zIndex = 'auto';
+            }
+        }
+    });
+
+
     // loads the main json for momotalk that and renders the characters
     // whose momotalks have been published
     $.ajax({
@@ -46,6 +96,7 @@ $(function () {
                 momotalkData[student] = {
                     "img": momotalkMainJson[student]["img"]
                 }
+                diyAdvancedStudentList.push(student);
             };
             $(".chatPreviewList").html(chats);
         },
@@ -68,11 +119,13 @@ $(function () {
                 dataType: "text",
                 success: function (data) {
                     let jsonData = JSON.parse(data);
-                    momotalkData[currentStudent]['affection'] = jsonData['affection'];
+                    for (let k in jsonData) {
+                        momotalkData[currentStudent][k] = jsonData[k];
+                    }
                     let newPage = `<div class="chatScreen"></div>`;
                     $(".mainWindow").append(newPage);
                     // this is the initial messsage
-                    $(".chatScreen").append(renderInitialMessage(momotalkData[currentStudent]["affection"]["1"]["messages"][messageBlockIndex][0][0]));
+                    // $(".chatScreen").append(renderInitialMessage(momotalkData[currentStudent]["affection"]["1"][0][0]));
 
                     $(".chatScreen").animate({
                         left: 0
@@ -80,14 +133,15 @@ $(function () {
                         $(".chatPreviewList").hide();
 
                         // this is the first render
-                        if (momotalkData[currentStudent]["affection"]["1"]["messages"][0].length > 1) {
-                            messageAnimations(momotalkData[currentStudent]["affection"]["1"]["messages"][0].slice(1), 0, function () {
-                                optionsAnimations(momotalkData[currentStudent]["affection"]["1"]["replies"][responseBlockIndex]);
-                            });
-                        }
-                        else {
-                            optionsAnimations(momotalkData[currentStudent]["affection"]["1"]["replies"][responseBlockIndex]);
-                        }
+                        // if (momotalkData[currentStudent]["affection"]["1"]["messages"][0].length > 1) {
+                        //     messageAnimations(momotalkData[currentStudent]["affection"]["1"]["messages"][0].slice(1), 0, function () {
+                        //         optionsAnimations(momotalkData[currentStudent]["affection"]["1"]["replies"][responseBlockIndex]);
+                        //     });
+                        // }
+                        // else {
+                        //     optionsAnimations(momotalkData[currentStudent]["affection"]["1"]["replies"][responseBlockIndex]);
+                        // }
+                        renderAnimationSequence(0);
                     });
                 },
                 error: function () {
@@ -99,25 +153,29 @@ $(function () {
 
     // onclick event for user response selector
     $(".mainWindow").on("click", ".option", function () {
-        if (responseBlockIndex !== -1) {
-            if ($(this).hasClass("option1")) {
-                // clicked on the first option
-                $(".optionsRow").remove();
-                responseAnimations(data[currentStudent]["replies"][responseBlockIndex][0][0]);
-                messageAnimations(data[currentStudent]["messages"][messageBlockIndex], 0, function () {
-                    optionsAnimations(data[currentStudent]["replies"][responseBlockIndex]);
-                });
-            }
+        // if (responseBlockIndex !== -1) {
+        //     if ($(this).hasClass("option1")) {
+        //         // clicked on the first option
+        //         $(".optionsRow").remove();
+        //         responseAnimations(data[currentStudent]["replies"][responseBlockIndex][0][0]);
+        //         messageAnimations(data[currentStudent]["messages"][messageBlockIndex], 0, function () {
+        //             optionsAnimations(data[currentStudent]["replies"][responseBlockIndex]);
+        //         });
+        //     }
 
-            else {
-                // clicked on second option
-                $(".optionsRow").remove();
-                responseAnimations(data[currentStudent]["replies"][responseBlockIndex][1][0]);
-                messageAnimations(data[currentStudent]["messages"][messageBlockIndex], 0, function () {
-                    optionsAnimations(data[currentStudent]["replies"][responseBlockIndex]);
-                });
-            }
-        }
+        //     else {
+        //         // clicked on second option
+        //         $(".optionsRow").remove();
+        //         responseAnimations(data[currentStudent]["replies"][responseBlockIndex][1][0]);
+        //         messageAnimations(data[currentStudent]["messages"][messageBlockIndex], 0, function () {
+        //             optionsAnimations(data[currentStudent]["replies"][responseBlockIndex]);
+        //         });
+        //     }
+        // }
+        let optionText = $(this).text();
+        $(".optionsRow").remove();
+        responseAnimations(optionText);
+        renderAnimationSequence(0);
     });
 
     // return button from chat to chatPreview
@@ -192,7 +250,6 @@ $(function () {
                 </div>`;
             $(".mainWindow").append(studentPanel);
         }
-
     });
 
     // diy basic mode text send with enter keypress
@@ -217,6 +274,13 @@ $(function () {
             basicInsertSave();
         }
     });
+
+    $(".diyAdvancedMode").on("click", function () {
+        if (!momotalkStudentSelect) {
+            let studentPanel = generateAdvancedStudentSelect();
+            $(".mainWindow").append(studentPanel);
+        }
+    })
 })
 
 
@@ -254,6 +318,8 @@ function studentSelectIconClick(event, mode) {
     // different modes
     if (mode === "basic") {
         renderDiyBasicMode();
+    } else if (mode === "advanced") {
+        renderAdvancedMode();
     }
 }
 
@@ -311,6 +377,65 @@ function renderDiyBasicMode() {
     `;
     $(".mainWindow").append(newDiy);
     $(".diyBasicScreen").animate({
+        left: 0,
+    }, 500, function () {
+        $(".diyHomePage").hide();
+    });
+}
+
+
+function renderAdvancedMode() {
+    let newDiy = `
+        <div class="diyAdvancedScreen">
+            <div class="diyAdvancedDataScreen"></div>
+            <div class="diyAdvancedInputBar">
+                <div class="diyAdvancedInputIcon">
+                    <img src=${momotalkMainJson[currentStudent]['img']} onclick="advancedSwapMomotalkPerson()">
+                </div>
+                <div class="diyAdvancedInputWindow">
+                    <input class="diyAdvancedInput" type="text">
+                </div>
+                <div class="diyAdvancedInputSend diyAdvancedButtonSmall">
+                    <p>发送</p>
+                </div>
+            </div>
+            <div class="diyAdvancedButtonBar" style="display: none">
+                <div class="diyAdvancedInputInsert diyAdvancedButtonLarge" onclick="advancedModeInsert()">
+                    <p>在此行前插入</p>
+                </div>
+                <div class="diyAdvancedInputDelete diyAdvancedButtonSmall" onclick="advancedModeDelete()">
+                    <p>删除</p>
+                </div>
+                <div class="diyAdvancedInputEdit diyAdvancedButtonSmall" onclick="advancedModeEdit()">
+                    <p>编辑</p>
+                </div>
+            </div>
+            <div class="diyAdvancedInsertBar" style="display: none">
+                <div class="diyAdvancedInsertIcon">
+                    
+                </div>
+                <div class="diyAdvancedInsertWindow">
+                    <input class="diyAdvancedInsert" type="text">
+                </div>
+                <div class="diyAdvancedInsertSave diyAdvancedButtonSmall" onclick="advancedInsertSave()">
+                    <p>保存</p>
+                </div>
+            </div>
+            <div class="diyAdvancedEditBar" style="display: none">
+                <div class="diyAdvancedEditIcon">
+                    
+                </div>
+                <div class="diyAdvancedEditWindow">
+                    <input class="diyAdvancedEdit" type="text">
+                </div>
+                <div class="diyAdvancedEditSave diyAdvancedButtonSmall" onclick="advancedEditSave()">
+                    <p>保存</p>
+                </div>
+            </div>
+        </div>
+    `;
+    $(".mainWindow").append(newDiy);
+    $(".diyAdvancedScreen").animate({
         left: 0,
     }, 500, function () {
         $(".diyHomePage").hide();
@@ -389,7 +514,7 @@ function basicModeSendText() {
                     [momotalkCurrectPerson, text, true, -1]
                 ]
             );
-            basicModeRecountIndices(momotalkData[currentStudent]['custom'].length-2);
+            basicModeRecountIndices(momotalkData[currentStudent]['custom'].length - 2);
             basicModeDataAppend(text, true);
         }
     }
@@ -444,10 +569,10 @@ function basicInsertSave() {
             // change the original first line
             momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]][0][2] = false;
             momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]].splice(0, 0, [currentStudent, text, true, null]);
-            basicModeRecountIndices(momotalkBasicLineDataIndex[0]);
+            basicModeRecountIndices(momotalkBasicLineDataIndex[0]); // DEPRECATED
 
             let movedLineDataIndex = findRowInData(momotalkBasicLineIndex + 1);
-            let movedLine = basicLineGeneration(momotalkData[currentStudent]['custom'][movedLineDataIndex[0]][movedLineDataIndex[1]][0], momotalkData[currentStudent]['custom'][movedLineDataIndex[0]][movedLineDataIndex[1]][0], false);
+            let movedLine = basicLineGeneration(momotalkData[currentStudent]['custom'][movedLineDataIndex[0]][movedLineDataIndex[1]][0], momotalkData[currentStudent]['custom'][movedLineDataIndex[0]][movedLineDataIndex[1]][1], false);
             $(`.diyBasicRow:eq(${momotalkBasicLineIndex})`).replaceWith(movedLine);
         }
 
@@ -456,16 +581,16 @@ function basicInsertSave() {
             momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]].splice(momotalkBasicLineDataIndex[1], 0, [currentStudent, text, false, null]);
             insertIcon = false;
         }
-        
+
         else {
             // inserting before a user block as the first block
             if (momotalkBasicLineDataIndex[0] === 0) {
                 momotalkData[currentStudent]['custom'].splice(0, 0, [[currentStudent, text, true, 1]]);
                 basicModeRecountIndices(0);
             }
-            
+
             else {
-                let prevBlockIndex = findRowInData(momotalkBasicLineIndex-1);
+                let prevBlockIndex = findRowInData(momotalkBasicLineIndex - 1);
                 let prevBlockPerson = (momotalkData[currentStudent]['custom'][prevBlockIndex[0]][0][0] === "USER");
                 // insert between user blocks as student
                 if (prevBlockPerson) {
@@ -514,16 +639,16 @@ function basicModeDelete() {
         let arr = momotalkData[currentStudent]['custom'];
         if ((momotalkBasicLineDataIndex[0] > 0) && (momotalkBasicLineDataIndex[0] < arr.length)) {
             // merge prev and after student blocks
-            if ((arr[momotalkBasicLineDataIndex[0]-1][0][0] !== "USER") && (arr[momotalkBasicLineDataIndex[0]][0][0] !== "USER")) {
+            if ((arr[momotalkBasicLineDataIndex[0] - 1][0][0] !== "USER") && (arr[momotalkBasicLineDataIndex[0]][0][0] !== "USER")) {
                 let after = arr[momotalkBasicLineDataIndex[0]][0];
-                $(`.diyBasicRow:eq(${momotalkBasicLineIndex+1})`).replaceWith(basicLineGeneration(after[0], after[1], false));
+                $(`.diyBasicRow:eq(${momotalkBasicLineIndex + 1})`).replaceWith(basicLineGeneration(after[0], after[1], false));
 
                 momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]][0][2] = false;
-                let merged = arr[momotalkBasicLineDataIndex[0]-1].concat(arr[momotalkBasicLineDataIndex[0]]);
-                momotalkData[currentStudent]['custom'].splice(momotalkBasicLineDataIndex[0]-1, 2, merged);
-                basicModeRecountIndices(momotalkBasicLineIndex-1);
+                let merged = arr[momotalkBasicLineDataIndex[0] - 1].concat(arr[momotalkBasicLineDataIndex[0]]);
+                momotalkData[currentStudent]['custom'].splice(momotalkBasicLineDataIndex[0] - 1, 2, merged);
+                basicModeRecountIndices(momotalkBasicLineIndex - 1);
             }
-            
+
             // delete without additional merges
             else {
                 if (momotalkBasicLineIndex < momotalkData[currentStudent]['custom'].length) {
@@ -531,7 +656,7 @@ function basicModeDelete() {
                 }
             }
         }
-        
+
         $(`.diyBasicRow:eq(${momotalkBasicLineIndex})`).remove();
     }
 
@@ -545,7 +670,7 @@ function basicModeDelete() {
             basicModeRecountIndices(momotalkBasicLineDataIndex[0]);
         }
         // delete the first line of a student block
-        else if (momotalkBasicLineDataIndex[1] === 0){
+        else if (momotalkBasicLineDataIndex[1] === 0) {
             momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]].splice(0, 1);
             momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]][0][2] = true;
             let arr = momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]][0];
@@ -554,13 +679,13 @@ function basicModeDelete() {
 
         // delete a line in a student block
         else {
-            if (momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]] === momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]].length-1) {
-                momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]][momotalkBasicLineDataIndex[1]-1][3] = momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]][momotalkBasicLineDataIndex[1]][3];
+            if (momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]] === momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]].length - 1) {
+                momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]][momotalkBasicLineDataIndex[1] - 1][3] = momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]][momotalkBasicLineDataIndex[1]][3];
             }
             momotalkData[currentStudent]['custom'][momotalkBasicLineDataIndex[0]].splice(momotalkBasicLineDataIndex[1], 1);
         }
     }
-    
+
     $(".diyBasicButtonBar").hide();
     $(".diyBasicInputBar").show();
 }
@@ -624,7 +749,7 @@ function basicLineGeneration(person, textContent, icon) {
                 <div class="diyBasicDataIconRow diyBasicRow" onclick="basicRowSelect(this)">
                     <div class="diyBasicStudentRow">
                         <div class="diyBasicStudentRowIcon">
-                            <img src=${momotalkData[currentStudent]['img']}>
+                            <img src=${momotalkData[person]['img']}>
                         </div>
                         <div class="diyBasicStudentRowLine">
                             <div class="diyStudentLineName">
@@ -658,6 +783,7 @@ function basicLineGeneration(person, textContent, icon) {
 }
 
 
+// DEPRECATED
 function renderInitialMessage(text) {
     return `
         <div class="chatRowWithIcon messageRow" id=${rowId}>
@@ -677,7 +803,7 @@ function renderInitialMessage(text) {
 }
 
 
-function renderMessageRow(text, withIcon) {
+function renderMessageRow(person, text, withIcon) {
     let msg = ``;
     if (text.indexOf(".png") === -1) {
         msg = `<div class="chatRowText chatRowContent" style="display: none">
@@ -695,11 +821,11 @@ function renderMessageRow(text, withIcon) {
         return `
             <div class="chatRowWithIcon messageRow" id=${rowId}>
                 <div class="chatRowIcon">
-                <img src="${data[currentStudent]["img"]}">
+                <img src="${momotalkData[person]["img"]}">
                 </div>
                 <div class="chatRowTextCol">
                     <div class="chatRowName">
-                        ${currentStudent}
+                        ${person}
                     </div>
                     <div class="chatTypingDots">
                         <div class="typingDot1"></div>
@@ -732,10 +858,32 @@ function renderMessageRow(text, withIcon) {
 }
 
 
+// DEPRECATED
 function renderOptionsRow(lines) {
     let options = ``;
     lines.forEach(line => {
         options += `<div class="option option1" onclick=updateMessageIndex(${line[1]})>${line[0]}</div>`;
+    });
+    return `
+        <div class="optionsRow">
+            <div class="optionsRowContent">
+                <div class="optionsHeader">
+                    <div class="optionsHeaderText">
+                        <p>回复</p>
+                    </div>
+                </div>
+                <div class="optionSelector">
+                    ${options}
+                </div>
+            </div>
+        <div>
+    `;
+}
+
+function generateOptionsBlock(block) {
+    let options = ``;
+    block.forEach(line => {
+        options += `<div class="option" onclick=updateBlockIndex(${line[3]})>${line[1]}</div>`;
     });
     return `
         <div class="optionsRow">
@@ -765,6 +913,7 @@ function renderResponseRow(line) {
 }
 
 
+// DEPRECATED
 function messageAnimations(lines, i, callback) {
     if (i >= lines.length) {
         callback();
@@ -772,16 +921,16 @@ function messageAnimations(lines, i, callback) {
     }
 
     let line = lines[i];
-    let icon = line[1];
+    let icon = line[2];
     let chatWindow = $(".chatScreen");
 
     if (line[line.length - 1] !== null) {
-        responseBlockIndex = line[line.length - 1];
+        responseBlockIndex = line[3];
     }
 
     $(chatWindow).queue(function (next) {
         rowId += 1;
-        let row = renderMessageRow(line[0], icon);
+        let row = renderMessageRow(line[1], icon);
 
         // wait 500ms before new message shows up
         $(chatWindow).animate({ opacity: '1' }, 500, function () {
@@ -801,11 +950,78 @@ function messageAnimations(lines, i, callback) {
 }
 
 
+// starts rendering down the block sequence and stops after rendering
+// the first options block
+function renderAnimationSequence(recursiveIndex) {
+    let currentBlock = momotalkData[currentStudent][momotalkCurrentType][momotalkCurrentBlockIndex];
+
+    // reached end of block sequence
+    if (momotalkCurrentBlockIndex === -1) {
+        return;
+    }
+
+    // preventing index out of range error
+    if (momotalkCurrentBlockIndex >= momotalkData[currentStudent][momotalkCurrentType].length) {
+        return;
+    }
+
+    // upcoming block is a user block, function should end after render
+    if (currentBlock[0][0] === "USER") {
+        renderOptions(currentBlock);
+        momotalkCurrentBlockIndex = currentBlock[currentBlock.length - 1][3];
+        return;
+    }
+
+    // end case for recursion
+    if (recursiveIndex >= currentBlock.length) {
+        momotalkCurrentBlockIndex = currentBlock[currentBlock.length - 1][3];
+        renderAnimationSequence(0);
+        return;
+    }
+
+    // recursive loop to go through a student message block
+    let chatWindow = $(".chatScreen");
+    $(chatWindow).queue(function (next) {
+
+        let row = renderMessageRow(currentBlock[recursiveIndex][0], currentBlock[recursiveIndex][1], currentBlock[recursiveIndex][2]);
+
+        $(chatWindow).animate({ opacity: '1' }, 500, function () {
+            $(chatWindow).append(row);
+            $(".mainWindow").scrollTop($(".mainWindow")[0].scrollHeight);
+            $(".messageRow:last").find(".chatTypingDots").delay(1000).fadeOut(1, function () {
+                $(this).remove();
+                $(".messageRow:last").find(".chatRowContent").show();
+                $(".mainWindow").scrollTop($(".mainWindow")[0].scrollHeight);
+                $(chatWindow).animate({ opacity: '1' }, 500, function () {
+                    next();
+                    renderAnimationSequence(recursiveIndex + 1);
+                });
+            });
+        });
+    }).dequeue();
+}
+
+
+// DEPRECATED
 function optionsAnimations(lines) {
     let chatWindow = $(".chatScreen");
 
     $(chatWindow).queue(function (next) {
         let options = renderOptionsRow(lines);
+        $(chatWindow).animate({ opacity: '1' }, 200, function () {
+            $(chatWindow).append(options);
+            $(".mainWindow").scrollTop($(".mainWindow")[0].scrollHeight);
+            next();
+        });
+    }).dequeue();
+}
+
+
+function renderOptions(block) {
+    let chatWindow = $(".chatScreen");
+
+    $(chatWindow).queue(function (next) {
+        let options = generateOptionsBlock(block);
         $(chatWindow).animate({ opacity: '1' }, 200, function () {
             $(chatWindow).append(options);
             $(".mainWindow").scrollTop($(".mainWindow")[0].scrollHeight);
@@ -830,6 +1046,39 @@ function responseAnimations(line) {
 }
 
 
+// DEPRECATED
 function updateMessageIndex(i) {
     messageBlockIndex = i;
+}
+
+
+function updateBlockIndex(newBlockIndex) {
+    momotalkCurrentBlockIndex = newBlockIndex;
+}
+
+
+function generateAdvancedStudentSelect() {
+    let students = ``;
+    for (let student in momotalkMainJson) {
+        let id = "studentSelectIcon" + student;
+        students += `
+                    <div class="studentSelectIcon" id=${id} onclick="studentSelectIconClick(event, 'advanced')">
+                        <img src=${momotalkMainJson[student]['img']}>
+                    </div>`;
+    }
+
+    let studentPanel = `
+        <div class="studentSelectPanel">
+            <div class="studentSelectPanelHeader">
+                <div class="studentSelectPanelHeaderText">
+                    Select a student
+                </div>
+                <div>X</div>
+            </div>
+            <div class="studentSelectIconGrid">
+                ${students}
+            </div>
+        </div>`;
+
+    return studentPanel;
 }

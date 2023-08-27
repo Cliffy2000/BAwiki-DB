@@ -1,0 +1,200 @@
+.customNavigationScreenOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    background-color: #000000;
+}
+
+.customNavigation {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 100%;
+    height: 63px;
+    display: flex;
+    justify-content: center;
+    user-select: none;
+}
+
+.customNavbar {
+    display: flex;
+    width: 100%;
+    max-width: 100vw;
+    max-width: calc(min(100vw, 600px));
+    justify-content: space-around;
+    background-color: #ffffff;
+    z-index: 1;
+    height: 63px;
+    overflow: hidden;
+}
+
+.customNavbarButton {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.customNavbarButtonIcon {
+    width: 27px;
+    height: 27px;
+    display: flex;
+}
+
+.customNavbarButtonIcon img {
+    width: 100%;
+    height: 100%;
+}
+
+.customNavbarButtonText {
+    margin-top: 3px;
+    color: #003153;
+    font-weight: bold;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+}
+
+.customNavbarBackground {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 20%, #FFFFFF 25%, #FFFFFF 75%, rgba(255, 255, 255, 0) 80%);
+    width: 100%;
+    min-width: 1200px;
+    position: absolute;
+    height: 100%;
+}
+
+.customSecondaryNavbarContainer {
+    height: 120px;
+    width: calc(min(100vw, 600px));
+    position: fixed;
+    left: 50%;
+    bottom: 65px;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+.customSecondaryMenuContainer {
+    width: 75%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.customSecondaryMenuGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-bottom: 10px;
+    opacity: 0;
+    position: absolute;
+    bottom: -100%;
+}
+
+.customSecondaryMenuItem {
+    height: 40px;
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 4px;
+    margin: 7px;
+}
+
+.customNavbarAronaAnchorContainer {
+    width: 25%;
+    min-width: 150px;
+    height: 100%;
+    background-color: slateblue;
+    display: flex;
+    justify-content: center;
+}
+
+.customNavbarAronaAnchor {
+    width: 150px;
+    height: 150px;
+}
+
+.aronaContainer {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    background-color: #8fd8ff;
+    user-select: none;
+}
+
+.aronaContainerCover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.aronaFallingFile {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+}
+
+.physicalObjectImg {
+    width: 100%;
+    height: 100%;
+}
+
+.aronaDrawEligma {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}
+
+.aronaDrawStudent2 {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+}
+
+.aronaDrawStudent3 {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+}
+
+
+@media (max-width: 600px) {
+    .customSecondaryMenuItem {
+        height: 30px;
+        width: 120px;
+        margin: 5px;
+    }
+
+    .aronaFallingFile {
+        width: 55px;
+        height: 55px;
+    }
+
+    .aronaDrawEligma {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .aronaDrawStudent2 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .aronaDrawStudent3 {
+        width: 65px;
+        height: 65px;
+    }
+}

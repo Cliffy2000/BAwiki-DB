@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/fullpage.js/dist/fullpage.min.css">
+    <style>
+        /* Add styles for your sections */
+        .section {
+            text-align: center;
+            font-size: 3em;
+            padding: 40px;
+        }
+
+        /* Style the navigation menu */
+        #myMenu {
+            position: fixed;
+            top: 0;
+            z-index: 100; /* Ensure it sits on top */
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        /* Style the navigation links */
+        #myMenu li {
+            display: inline-block;
+            margin: 10px;
+            color: black;
+            cursor: pointer;
+        }
+
+        /* Style the active link (or section) */
+        #myMenu .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <ul id="myMenu">
+        <li data-menuanchor="section1" class="active">Section 1</li>
+        <li data-menuanchor="section2">Section 2</li>
+        <li data-menuanchor="section3">Section 3</li>
+    </ul>
+
+    <div id="fullpage">
+        <div class="section" data-anchor="section1">Section 1</div>
+        <div class="section" data-anchor="section2">Section 2</div>
+        <div class="section" data-anchor="section3">Section 3</div>
+    </div>
+
+    <script src="https://unpkg.com/fullpage.js"></script>
+    <script>
+        new fullpage('#fullpage', {
+            menu: '#myMenu',
+            licenseKey: "gplv3-license",
+            anchors: ['section1', 'section2', 'section3'],
+            navigation: true,
+            afterLoad: function(origin, destination, direction){
+                var activeSection = destination.anchor;
+                var menuItem = document.querySelector('[data-menuanchor='+ activeSection +']');
+                var menuItems = document.querySelectorAll('#myMenu li');
+
+                // remove active class from all menu items
+                menuItems.forEach(function(item) {
+                    item.classList.remove('active');
+                });
+
+                // add active class to current section's menu item
+                menuItem.classList.add('active');
+            },
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,678 @@
+.HomePageWrapper {
+    user-select: none;
+}
+
+.homePageSection {
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: #a9a9a9;
+    position: relative;
+}
+
+.homePageSectionContent {
+    z-index: 1;
+    position: relative;
+}
+
+.homePageSectionBackground {
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.homePageSideNav {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.homePageSideNavButton, .homePageServerNavButton, .homePageLanguageNavButton {
+    background-color: #ffffff;
+    color: #003153;
+    transform: skewX(-8deg);
+    display: flex;
+    justify-content: center;
+    border-radius: 2px;
+    align-items: center;
+    font-size: 15px;
+    margin: 4px;
+    font-weight: bold;
+    box-shadow: 1px 1px 1px #6f6f6f;
+    width: 110px;
+}
+
+.homePageServerNavButton, .homePageLanguageNavButton {
+    margin: 3px 4px;
+}
+
+.homePageSideNavButtonActive, .homePageServerNavButtonActive, .homePageLanguageNavButtonActive {
+    background-color: #003153;
+    color: #ffffff;
+    font-weight: normal
+}
+
+.homePageSideNavText, .homePageServerNavText, .homePageLanguageNavText {
+    transform: skewX(8deg);
+    margin: 3px 20px;
+}
+
+.homePageLeftNav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+.homePageServerNav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.homePageLanguageNav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.homePage2 {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.homePageEventsCol1, .homePageEventsCol2 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    margin: 0 10px;
+}
+
+.homePageWhiteContainer {
+    margin: 15px 2px;
+    background-color: #ffffff;
+    border-radius: 7px;
+}
+
+.homePageEventCycleContainer {
+    margin: 3px;
+    padding: 5px 5px 0 5px;
+    border: 3px solid #4682B4;
+    border-radius: 5px;
+    position: relative;
+    width: calc(min(400px, calc(100vw - 20px)));
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+}
+
+.homePageEventCyclePageContainer {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    overflow: hidden;
+}
+
+.homePageEventCyclePage {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    display: none;
+    position: absolute;
+}
+
+.homePageEventCyclePage img {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.homePageEventCycleRemainingTime {
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.homePageEventCycleButtonLeft {
+    height: 200px;
+    width: 20px;
+    position: absolute;
+    top: 42.5%;
+    left: 2.5%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.homePageEventCycleButtonRight {
+    height: 200px;
+    width: 20px;
+    position: absolute;
+    top: 42.5%;
+    right: 2.5%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.homePageEventCycleStickerContainer {
+    position: absolute;
+    bottom: -20px;
+    right: 7.5%;
+    width: 80px;
+    height: 30px;
+}
+
+.homePageEventCycleSticker {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.homePageEventCycleStickerImg {
+    position: absolute;
+    width: 80px;
+    top: 0;
+    left: 0;
+}
+
+.homePageEventCycleStickerText {
+    z-index: 1;
+}
+
+.homePageCol {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.homePage3 {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.homePageUpdatesCycleContainer {
+    margin: 3px;
+    padding: 5px 5px 0 5px;
+    border: 3px solid #4682B4;
+    border-radius: 5px;
+    position: relative;
+    width: calc(min(800px, calc(100vw - 20px)));
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.homePageCenterContainer {
+    margin: 3px;
+    padding: 5px 5px 0 5px;
+    border: 3px solid #4682B4;
+    border-radius: 5px;
+    position: relative;
+    width: calc(min(800px, calc(100vw - 20px)));
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.homePageAboutContainer {
+    margin: 3px;
+    padding: 5px 5px 0 5px;
+    border: 3px solid #4682B4;
+    border-radius: 5px;
+    position: relative;
+    width: calc(min(800px, calc(100vw - 20px)));
+    display: flex;
+    flex-direction: row;
+    min-height: 360px;
+    max-height: 480px;
+}
+
+.homePageUpdatesCyclePageContainer {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    overflow: hidden;
+}
+
+.homePageUpdatesCyclePage {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+}
+
+.homePageUpdatesCycleText {
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #003153;
+}
+
+.homePageUpdatesCycleButtonLeft {
+    height: 200px;
+    width: 25px;
+    position: absolute;
+    top: 42.5%;
+    left: 4.5%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.homePageUpdatesCycleButtonRight {
+    height: 200px;
+    width: 25px;
+    position: absolute;
+    top: 42.5%;
+    right: 4.5%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.homePageUpdatesCycleStickerContainer {
+    position: absolute;
+    bottom: -20px;
+    right: 7.5%;
+    width: 120px;
+    height: 40px;
+}
+
+.homePageUpdatesCycleSticker {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.homePageUpdatesCycleStickerImg {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.homePageUpdatesCycleStickerText {
+    font-size: 17px;
+    z-index: 1;
+}
+
+.homePageBulletinBoard {
+    margin: 3px;
+    padding: 10px;
+    border: 3px solid #4682B4;
+    border-radius: 5px;
+    position: relative;
+    width: calc(min(400px, calc(100vw - 20px)));
+    height: 560px;
+    display: flex;
+    flex-direction: column;
+}
+
+.homePageBulletinHeader {
+    background-color: #003153;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding: 3px;
+}
+
+.homePageBulletinContentContainer {
+    background-color: #e7f1f7;
+    height: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    padding: 10px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.homePageBulletinContentContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.homePageBulletin.bulletinNotice {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: white;
+    padding: 7px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.homePageBulletin.bulletinEvent {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    padding: 7px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.homePageBulletin.bulletinWarning {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: white;
+    padding: 7px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.homePageBulletinTitle {
+    text-align: center;
+    background-color: #003153;
+    color: white;
+    border-radius: 4px;
+    padding: 3px 10px;
+}
+
+.homePageBulletin.bulletinWarning .homePageBulletinTitle {
+    text-align: center;
+    background-color: #a00000;
+    color: white;
+    border-radius: 4px;
+    padding: 3px 10px;
+}
+
+.homePageBulletinText {
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.homePageBulletin.bulletinEvent .homePageBulletinTitle {
+    width: 100%;
+}
+
+.homePageBulletin.bulletinEvent .homePageBulletinText {
+    padding-top: 5px;
+}
+
+.homePage4, .homePage5 {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.homePageInfoCycleContainer img {
+    display: none;
+}
+
+.homePageInfoTextContainer {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.homePageAboutText {
+    width: 60%;
+    padding: 15px;
+    text-align: justify;
+}
+
+.homePageAboutWikiContainer {
+    width: 40%;
+    padding: 5px;
+}
+
+.homePageAboutWikiContainerHeader {
+    background-color: #003153;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    padding: 3px;
+}
+
+.homePageAboutWikiText {
+    background-color: #e7f1f7;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.homePageAboutWikiText a {
+    text-decoration: underline;
+    color: black;
+}
+
+/* Mobile UI */
+@media (max-width: 600px) {
+    .homePageSideNavButton {
+        transform: none;
+        width: 15px;
+        height: 15px;
+    }
+
+    .homePageSideNavButtonActive {
+        width: 20px;
+        height: 20px;
+    }
+
+    .homePageSideNavText {
+        display: none;
+    }
+
+    .homePageUpdatesCycleContainer {
+        height: 450px;
+    }
+
+    .homePageCenterContainer {
+        height: 450px;
+    }
+}
+
+@media (max-width: 450px) {
+    .homePageUpdatesCycleContainer {
+        height: 375px;
+    }
+
+    .homePageCenterContainer {
+        height: 375px;
+    }
+}
+
+/* Side navbar should still have mobile effect due to limited screen width */
+@media (max-width: 840px) {
+    .homePageSideNavButton {
+        transform: none;
+        width: 15px;
+        height: 15px;
+    }
+
+    .homePageSideNavButtonActive {
+        width: 20px;
+        height: 20px;
+    }
+
+    .homePageSideNavText {
+        display: none;
+    }
+
+    .homePageServerNavButton {
+        transform: none;
+        width: 75px;
+    }
+
+    .homePageServerNavText {
+        transform: none;
+        margin: 3px 0;
+    }
+
+    .homePageLanguageNavButton {
+        transform: none;
+        width: 75px;
+    }
+
+    .homePageLanguageNavText {
+        transform: none;
+        margin: 3px 0;
+    }
+
+    .homePage2 {
+        flex-direction: column;
+    }
+
+    .homePageWhiteContainer {
+        margin: 10px 2px;
+    }
+
+    .homePageBulletinBoard {
+        padding: 0;
+        height: 150px;
+    }
+
+    .homePageBulletinContentContainer {
+        margin: 0;
+        padding: 5px;
+    }
+
+    .homePageBulletinHeader {
+        display: none;
+    }
+
+    .homePageBulletinTitle {
+        font-size: 12px;
+    }
+
+    .homePageBulletin.bulletinEvent {
+        flex-direction: row;
+        padding: 0px 7px;
+    }
+
+    .homePageBulletin.bulletinEvent .homePageBulletinTitle {
+        width: 75%;
+        font-size: 12px;
+    }
+    
+    .homePageBulletinText {
+        font-size: 12px;
+    }
+
+    .homePageEventCycleContainer {
+        padding: 5px 15px 5px 5px;
+        height: 170px;
+        flex-direction: row;
+    }
+
+    .homePageEventCyclePageContainer {
+        height: 100%;
+    }
+
+    .homePageEventCycleRemainingTime {
+        height: 100%;
+        margin-left: 10px;
+        width: 35%;
+    }
+
+    .homePageEventCycleButtonLeft {
+        height: 100%;
+        top: 50%;
+        left: 0;
+    }
+
+    .homePageEventCycleButtonRight {
+        height: 100%;
+        top: 50%;
+        right: 0;
+    }
+
+    .homePageEventCycleStickerContainer {
+        bottom: -15px;
+    }
+
+    .homePageEventsCol2 {
+        margin-bottom: 15px;
+    }
+
+    .homePageAboutContainer {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .homePageAboutText {
+        padding: 10px;
+        font-size: 12px;
+        margin: 5px;
+        border-radius: 3px;
+        width: auto;
+    }
+
+    .homePageAboutWikiContainer {
+        width: auto;
+        padding: 5px;
+    }
+
+    .homePageAboutWikiContainerHeader {
+        font-size: 15px;
+        padding: 0;
+    }
+
+    .homePageAboutWikiText {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 960px) {
+    .homePageUpdatesCycleContainer {
+        width: calc(min(675px, calc(90vw - 20px)));
+    }
+
+    .homePageCenterContainer {
+        width: calc(min(675px, calc(90vw - 20px)));
+        height: 450px;
+    }
+    
+    .homePageAboutContainer {
+        width: calc(min(675px, calc(90vw - 20px)));
+    }
+}

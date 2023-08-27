@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fadeout Text Transition</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      text-align: center;
+      margin: 100px;
+    }
+    .text-line {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+    }
+    .text-content {
+      display: inline;
+      position: relative;
+      transition: transform 2s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="textContainer">
+    <!-- Text lines will be inserted here -->
+  </div>
+
+  <script>
+    // The text to be animated
+    const text = "This is a sample line of text.";
+
+    // Split the text into lines
+    const lines = text.split(" ");
+
+    // Generate HTML elements for each line
+    lines.forEach((line, index) => {
+      const span = document.createElement('span');
+      span.className = 'text-line';
+      span.innerHTML = `<span class="text-content">${line}</span> `;
+      document.getElementById('textContainer').appendChild(span);
+    });
+
+    // Function to apply random horizontal shifts
+    function applyRandomShift() {
+      const textSpans = document.querySelectorAll('.text-content');
+      textSpans.forEach(span => {
+        const shiftAmount = Math.floor(Math.random() * 100) - 50; // between -50 and 50
+        span.style.transform = `translateX(${shiftAmount}px)`;
+      });
+    }
+
+    // Apply the random shifts
+    setTimeout(() => {
+      applyRandomShift();
+    }, 500);  // Apply the shift 500ms after the page loads
+  </script>
+
+</body>
+</html>
