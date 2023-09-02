@@ -9,6 +9,9 @@ var [aronaVelocityX, aronaVelocityY] = [0, 0];
 var [aronaAccelerationX, aronaAccelerationY] = [0, 0];
 var [aronaDeltaX, aronaDeltaY] = [0, 0];
 
+var [aronaScrollPrevX, aronaScrollPrevY] = [0, 0];
+var [aronaScrollDeltaX, aronaScrollDeltaY] = [0, 0];
+
 var aronaDragging = false;
 var aronaGrounded = true;
 var aronaDizzy = false;
@@ -380,6 +383,12 @@ $(function () {
     })
 
     setInterval(function mainLoop() {
+
+        let [currentScrollX, currentScrollY] = [$(window).scrollLeft(), $(window).scrollTop()];
+        [aronaScrollDeltaX, aronaScrollDeltaY] = [currentScrollX - aronaScrollPrevX, currentScrollY - aronaScrollPrevY];
+        [aronaScrollPrevX, aronaScrollPrevY] = [currentScrollX, currentScrollY];
+
+
         // main loop for arona if she is not grounded
         if (!aronaGrounded) {
             if (!aronaDragging) {
@@ -397,6 +406,9 @@ $(function () {
             }
 
             aronaConstrainPosition();
+            
+            aronaPosX += aronaScrollDeltaX;
+            aronaPosY += aronaScrollDeltaY;
 
             $(".aronaContainer").css({
                 'position': 'fixed',
@@ -439,6 +451,9 @@ $(function () {
                 "left": $(this).data("posX")
             })
         });
+
+
+
     }, 1000 / FRAME_RATE);
 })
 
