@@ -42,7 +42,7 @@ var aronaBannerDataPath;
 var aronaBannerImgs;
 
 var aronaBannerFileBlue;
-var aronaBannerFIleGold;
+var aronaBannerFileGold;
 var aronaBannerFilePurple;
 var aronaBannerEligma;
 
@@ -95,21 +95,115 @@ function drawRandomStudent(rarity) {
 function generateNavbar() {
     // generates the main navbar to be added to the dom
     // return: html string
-    let navbar = ``;
+    let navbar = `
+        <div class="customNavigation">
+            <div class="customNavbar">
+                <div class="customNavbarButton" data-secondary="home">
+                    <div class="customNavbarButtonIcon">
+                        <img src="https://patchwiki.biligame.com/images/ba/e/e4/4nbwrpmailme8912lkvlzy9p3clf28h.svg">
+                    </div>
+                    <div class="customNavbarButtonText">
+                        首页
+                    </div>
+                </div>
+                <div class="customNavbarButton" data-secondary="catalog">
+                    <div class="customNavbarButtonIcon">
+                        <img src="https://patchwiki.biligame.com/images/ba/8/8c/azzpw8oeofvup8ch6c26hcfakjw0me1.svg">
+                    </div>
+                    <div class="customNavbarButtonText">
+                        图鉴
+                    </div>
+                </div>
+                <div class="customNavbarButton" data-secondary="intel">
+                    <div class="customNavbarButtonIcon">
+                        <img src="https://patchwiki.biligame.com/images/ba/9/9f/gr7784eaijteidglvx3folrxiswoq5f.svg">
+                    </div>
+                    <div class="customNavbarButtonText">
+                        情报
+                    </div>
+                </div>
+                <div class="customNavbarButton" data-secondary="news">
+                    <div class="customNavbarButtonIcon">
+                        <img src="https://patchwiki.biligame.com/images/ba/0/0a/k5agqn9mgivjqkhfhbgx3anv30bl9nr.svg">
+                    </div>
+                    <div class="customNavbarButtonText">
+                        动态
+                    </div>
+                </div>
+                <div class="customNavbarButton" data-secondary="others">
+                    <div class="customNavbarButtonIcon">
+                        <img src="https://patchwiki.biligame.com/images/ba/9/90/2jo51y038qw8ih98c1xemgyl7i3yyl0.svg">
+                    </div>
+                    <div class="customNavbarButtonText">
+                        其他
+                    </div>
+                </div>
+                <div class="customNavbarBackground"></div>
+            </div>
+        </div>
+
+        <div class="customSecondaryNavbarContainer">
+            <div class="customSecondaryMenuContainer">
+                <div class="customSecondaryMenuGrid">
+                    <div class="customSecondaryMenuItem" data-button-index=1></div>
+                    <div class="customSecondaryMenuItem" data-button-index=2></div>
+                    <div class="customSecondaryMenuItem" data-button-index=3></div>
+                    <div class="customSecondaryMenuItem" data-button-index=4></div>
+                </div>
+            </div>
+            <div class="customNavbarAronaAnchorContainer">
+                <div class="customNavbarAronaAnchor"></div>
+            </div>
+        </div>
+    `;
+
+    return navbar;
+}
+
+
+function generateInitialArona() {
+    // generates the initial arona to be added to the dom
+    // return: html string
+
 }
 
 
 function generateDrawFile(rarity) {
     // generates the colored file that drops when arona collides with the border
     // return: html string
+    let file;
+    if (rarity === '1') {
+        file = aronaBannerFileBlue;
+    } else if (rarity === '2') {
+        file = aronaBannerFileGold;
+    } else {
+        file = aronaBannerFilePurple;
+    }
 
+    let fileHtml = `<div class="aronaFallingFile physicalObject">
+        <img src="${file}">
+    </div>`;
+    return fileHtml;
 }
 
 
-function generateDrawItem() {
+function generateDrawItem(rarity, student) {
     // generates the bounce back item when files disappear below the lower border.  it can be a eligma or a student icon
     // return: html string
+    let item;
 
+    if (rarity === '1') {
+        item = `<div class="aronaDrawEligma physicalObject">
+            <img src="${aronaBannerEligma}">
+        </div>`;
+    } else {
+        // TODO: differentiate between rarities by changing size
+        item = `<div class="aronaDrawStudent${rarity} physicalObject">
+            <img src="${aronaBannerImgs[student]}">
+        </div>`;
+    }
+
+    return item;
 }
 
 
