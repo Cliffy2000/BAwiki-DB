@@ -38,7 +38,13 @@ var aronaUmbrellaImgPath;
 
 var aronaBannerPool = {};
 var aronaBannerRates = {};
+var aronaBannerDataPath;
 var aronaBannerImgs;
+
+var aronaBannerFileBlue;
+var aronaBannerFIleGold;
+var aronaBannerFilePurple;
+var aronaBannerEligma;
 
 // ======== Preload resources ========
 
@@ -50,6 +56,7 @@ function preloadAronaImages() {
 
 
 function preloadAronaImagesComplete() {
+    // helper function for step in image preload
     
 }
 
@@ -65,13 +72,21 @@ function preloadBannerImages() {
 function drawRandomFile() {
     // randomly picks a rarity according to banner rates
     // return: string - rarity value
-
+    let randomNum = Math.random();
+    if (randomNum < aronaBannerRates['1']) {
+        return '1';
+    } else if (randomNum < (aronaBannerRates['1'] + aronaBannerRates['2'])) {
+        return '2';
+    } else {
+        return '3';
+    }
 }
 
 function drawRandomStudent(rarity) {
     // randomly picks a student from the chosen rarity
     // return: string - student name
-
+    let index = Math.floor(Math.random() * aronaBannerPool[rarity].length);
+    return aronaBannerPool[rarity][index];
 }
 
 
@@ -80,7 +95,7 @@ function drawRandomStudent(rarity) {
 function generateNavbar() {
     // generates the main navbar to be added to the dom
     // return: html string
-
+    let navbar = ``;
 }
 
 
