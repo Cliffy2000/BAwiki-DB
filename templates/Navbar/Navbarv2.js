@@ -1,6 +1,11 @@
 // Navbar & Arona Assistant v2.0
 // 2023.8.28
 
+/**
+ * @typedef {string} html
+ * A string, usually formatted, that contains HTML content.
+ */
+
 // ======== Variable list ========
 // constants
 var FRAME_RATE = 60;
@@ -61,53 +66,63 @@ var aronaBannerFilePurple;
 var aronaBannerEligma;
 
 // ======== Preload resources ========
-
+/** 
+ * Add the images to the dom without adding them to elements.
+ */
 function preloadAronaImages() {
-    // add the images to the dom without adding them to elements
 
 }
 
 
+/**
+ * Helper function for step in image preload.
+ */
 function preloadAronaImagesComplete() {
-    // helper function for step in image preload
     
 }
 
 
+/**
+ * Adds the student icons loaded from json file to the dom without elements.
+ */
 function preloadBannerImages() {
-    // add the student icons loaded from json file to the dom without elements
 
 }
 
 
 // ======== Banner draw functions ========
-
+/**
+ * Randomly picks a rarity according to banner rates.
+ * @returns {integer} number between 1~3 to indicate the base stars of the student
+ */
 function drawRandomFile() {
-    // randomly picks a rarity according to banner rates
-    // return: string - rarity value
     let randomNum = Math.random();
     if (randomNum < aronaBannerRates['1']) {
-        return '1';
+        return 1;
     } else if (randomNum < (aronaBannerRates['1'] + aronaBannerRates['2'])) {
-        return '2';
+        return 2;
     } else {
-        return '3';
+        return 3;
     }
 }
 
+/**
+ * Randomly picks a student from the chosen rarity.
+ * @param {integer} rarity the base stars of the student
+ * @returns {string} the name of the chosen student
+ */
 function drawRandomStudent(rarity) {
-    // randomly picks a student from the chosen rarity
-    // return: string - student name
     let index = Math.floor(Math.random() * aronaBannerPool[rarity].length);
     return aronaBannerPool[rarity][index];
 }
 
 
 // ======== Html generation functions ========
-
+/**
+ * Generates the main navbar to be added to the DOM.
+ * @returns {html} the navbar of the page
+ */
 function generateNavbar() {
-    // generates the main navbar to be added to the dom
-    // return: html string
     let navbar = `
         <div class="customNavigation">
             <div class="customNavbar">
@@ -174,16 +189,21 @@ function generateNavbar() {
 }
 
 
+/**
+ * Generates the initial Arona to be added to the DOM.
+ * @returns {html} arona in default hidden state
+ */
 function generateInitialArona() {
-    // generates the initial arona to be added to the dom
-    // return: html string
 
 }
 
 
+/**
+ * Generates the colored file that drops when Arona collides with the border.
+ * @param {integer} rarity the base stars of the student
+ * @returns {html} html element of the file
+ */
 function generateDrawFile(rarity) {
-    // generates the colored file that drops when arona collides with the border
-    // return: html string
     let file;
     if (rarity === '1') {
         file = aronaBannerFileBlue;
@@ -200,9 +220,13 @@ function generateDrawFile(rarity) {
 }
 
 
+/**
+ * Generates the bounce back item when files disappear below the lower border. It can be a eligma or a student icon.
+ * @param {integer} rarity 
+ * @param {string} student 
+ * @returns {html} html element that contains whatever item that bounces back.
+ */
 function generateDrawItem(rarity, student) {
-    // generates the bounce back item when files disappear below the lower border.  it can be a eligma or a student icon
-    // return: html string
     let item;
 
     if (rarity === '1') {
@@ -221,74 +245,93 @@ function generateDrawItem(rarity, student) {
 
 
 // ======== Navbar functions ========
-
+/**
+ * Plays the animation that renders in the navbar. Arona is changed from hidden to standby.
+ */
 function navbarShow() {
-    // plays the animation that renders in the navbar. arona is changed from hidden to standby.
-    // animation sequence: container slide up, ARONA characters, fade to main buttons
 
 }
 
 
+/**
+ * Plays the animation that hides the navbar. arona is changed from standby to hidden.
+ */
 function navbarHide() {
-    // plays the animation that hides the navbar. arona is changed from standby to hidden.
-    // animation sequence: 
 
 }
 
 
 // ======== Arona functions ========
-
+/**
+ * Initializes Arona's position and make sure she is set to hidden.
+ */
 function aronaInitialize() {
-    // initializes arona's position.
 
 }
 
 
+/**
+ * Returns Arona to standby position and sets states accordingly.
+ */
 function aronaSetStandby() {
-    // returns arona to the standby position and sets states accordingly.
 
 }
 
 
+/**
+ * Function that is attached to the drag start event listeners.
+ * @param {*} event 
+ */
 function aronaStartDrag(event) {
-    // function that is attached to the drag start event listener. 
     
 }
 
-
+/**
+ * Function that is attached to the drag event listeners. Also checks for detailed information at current mouse locaiton.
+ * @param {*} event 
+ */
 function aronaDrag(event) {
-    // function that is attached to the drag event listener. also checks for detailed information at current mouse locaiton.
 
 }
 
 
+/**
+ * Function that is attached to the drag end event listeners. Determines whether Arona should hover for info, open umbrella or free fall.
+ */
 function aronaEndDrag() {
-    // function that is attached to the drag end event listener. determines whether arona should hover for info, open umbrella or free fall.
 
 }
 
 
+/**
+ * Limits Arona's position to be within the borders. Handles bounces and edge cases for off screen mouse positions.
+ */
 function aronaConstrainPosition() {
-    // limits arona's position to be within the borders. handles bounces and edge cases for off screen mouse positions.
 
 }
 
 
+/**
+ * Limits velocities when Arona has umbrella open.
+ */
 function aronaUmbrella() {
-    // limits variables for when arona is falling with open umbrella.
 
 }
 
 
+/**
+ * Checks if the current mouse position is over HTML elements with class name that indicates additional info.
+ * Directly updates the global detailed info variable.
+ */
 function aronaPositionInfoCheck() {
-    // checks if the current mouse position is over html elements with class name that indicates additional info.
-    // directly updates the global detailed info variable.
 
 }
 
 
+/**
+ * Updates Arona to change between character and explanation box states.
+ */
 function aronaDetailedInfoToggle() {
-    // changes arona to an explanation box for detailed info.
 
 }
 
