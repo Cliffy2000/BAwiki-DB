@@ -7,12 +7,12 @@
  */
 
 // ======== Variable list ========
-// constants
+// Constants
 var FRAME_RATE = 60;
 var GRAVITY = 30;
 var BOUNCE = 1;
 
-// variables
+// Variables
 var [aronaTouchOffsetX, aronaTouchOffsetY] = [0.7, 0.59];
 var [aronaPosX, aronaPosY] = [0, 0];
 var [aronaVelocityX, aronaVelocityY] = [0, 0];
@@ -24,16 +24,18 @@ var [mouseDownPrevPosX, mouseDownNewPosY] = [0, 0];
 var [aronaScrollPrevX, aronaScrollPrevY] = [0, 0];
 var [aronaScrollDeltaX, aronaScrollDeltaY] = [0, 0];
 
-// states
+// States
 var customNavbarOverlay = false;
 var customNavbarSecondaryMenu = false;
 
 var aronaPreloaded = false;
 var aronaBannerPreloaded = false;
-var aronaState = "hidden";  // hidden, standby, dizzy, falling, umbrella
-var aronaGrounded = true;   // if arona can fall below the screen or not
+/** @type {"hidden" | "standby" | "dragging" | "falling" | "dizzy"} */
+var aronaState = "hidden";
+/** If Arona can fall through the bottom */
+var aronaGround = true;
 
-// resource variables
+// Resource variables
 // Arona hidden
 var aronaHiddenBaseImgPath;
 var aronaHiddenHeadwearImgPath;
@@ -41,17 +43,22 @@ var aronaHiddenHeadwearImgPath;
 // Arona standby
 var aronaStandbyBaseImgPath;
 var aronaStandbyExpDefaultImgPath;
-var aronaStandbyExpDiff1ImgPath;    // blink
+/** Blink expression for Arona in standby state */
+var aronaStandbyExpDiff1ImgPath;
 var aronaStandbyHands1ImgPath;
 var aronaStandbyHands2ImgPath;
 
 // Arona active
 var aronaActiveBaseImgPath;
 var aronaActiveExpDefaultImgPath;
-var aronaActiveExpDiff1ImgPath;     // Blink
-var aronaActiveExpDiff2ImgPath;     // Happy
-var aronaActiveExpDiff3ImgPath;     // Shocked
-var aronaActiveExpDiff4ImgPath;     // Dizzy
+/** Blink expression for Arona in active state */
+var aronaActiveExpDiff1ImgPath;
+/** Happy expression for Arona in active state */
+var aronaActiveExpDiff2ImgPath;
+/** Shocked expression for Arona in active state */
+var aronaActiveExpDiff3ImgPath;
+/** Dizzy expression for Arona in active state */
+var aronaActiveExpDiff4ImgPath;
 var aronaActiveTexture1ImgPath;
 var aronaActiveTexture2ImgPath;
 
