@@ -29,12 +29,26 @@ var aronaState = "hidden";  // hidden, standby, dizzy, falling, umbrella
 var aronaGrounded = true;   // if arona can fall below the screen or not
 
 // resource variables
-var aronaHiddenImgPath;
-var aronaStandbyImgPath;
-var aronaDraggingImgPath;
-var aronaDizzyImgPath;
-var aronaFallingImgPath;
-var aronaUmbrellaImgPath;
+// Arona hidden
+var aronaHiddenBaseImgPath;
+var aronaHiddenHeadwearImgPath;
+
+// Arona standby
+var aronaStandbyBaseImgPath;
+var aronaStandbyExpDefaultImgPath;
+var aronaStandbyExpDiff1ImgPath;    // blink
+var aronaStandbyHands1ImgPath;
+var aronaStandbyHands2ImgPath;
+
+// Arona active
+var aronaActiveBaseImgPath;
+var aronaActiveExpDefaultImgPath;
+var aronaActiveExpDiff1ImgPath;     // Blink
+var aronaActiveExpDiff2ImgPath;     // Happy
+var aronaActiveExpDiff3ImgPath;     // Shocked
+var aronaActiveExpDiff4ImgPath;     // Dizzy
+var aronaActiveTexture1ImgPath;
+var aronaActiveTexture2ImgPath;
 
 var aronaBannerPool = {};
 var aronaBannerRates = {};
@@ -50,7 +64,6 @@ var aronaBannerEligma;
 
 function preloadAronaImages() {
     // add the images to the dom without adding them to elements
-    let imgs = [aronaHiddenImgPath, aronaStandbyImgPath, aronaDraggingImgPath, aronaDizzyImgPath, aronaFallingImgPath, aronaUmbrellaImgPath];
 
 }
 
