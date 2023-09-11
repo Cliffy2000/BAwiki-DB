@@ -1,5 +1,5 @@
-// Navbar & Arona Assistant v2.0
-// 2023.8.28
+// Navbar & Arona Assistant v2.0.1
+// 2023.9.10
 
 /**
  * @typedef {string} html
@@ -7,7 +7,14 @@
  */
 
 // ======== Variable list ========
+// CSS variables
+var cssNavbarHeight = 65;
+var cssNavbarTransition1Time = 500;
+var cssNavbarTransition2Time = 500;
+var cssNavbarTransition3Time = 500;
+
 // Constants
+var extraInfoClassName = "aronaDetailedInfoData";
 var FRAME_RATE = 60;
 var GRAVITY = 30;
 var BOUNCE = 1;
@@ -30,7 +37,10 @@ var customNavbarSecondaryMenu = false;
 
 var aronaPreloaded = false;
 var aronaBannerPreloaded = false;
-/** @type {"hidden" | "standby" | "dragging" | "falling" | "dizzy"} */
+/** 
+ * @type { "hidden" | "standby" | "dragging" | "falling" | "dizzy" } 
+ * The later three are all considered active states
+ * */
 var aronaState = "hidden";
 /** If Arona can fall through the bottom */
 var aronaGround = true;
@@ -73,19 +83,30 @@ var aronaBannerFilePurple;
 var aronaBannerEligma;
 
 // ======== Preload resources ========
+/**
+ * Preload an image.
+ * @param {string} src the link to the image
+ * @returns {Promise} a promise to the image
+ */
+function preloadImg(src) {
+    return new Promise((resolve, reject) => {
+        let img = new Image();
+        img.src = src;
+        img.onload = function() {
+            resolve(src);
+        };
+        img.onerror = function() {
+            reject(new Error(`Failed to load image at ${src}`));
+        };
+    });
+}
+
+
 /** 
  * Add the images to the dom without adding them to elements.
  */
 function preloadAronaImages() {
 
-}
-
-
-/**
- * Helper function for step in image preload.
- */
-function preloadAronaImagesComplete() {
-    
 }
 
 
@@ -197,6 +218,36 @@ function generateNavbar() {
 
 
 /**
+ * Generates the A.R.O.N.A. letter cover for the navbar.
+ * @returns {html} the html for the cover in visible state
+ */
+function generateNavbarCover() {
+    let cover = `<div class="customNavbarCover">
+        <div class="customNavbarCoverContent">
+            <div>A.</div>
+            <div>R.</div>
+            <div>O.</div>
+            <div>N.</div>
+            <div>A.</div>
+        </div>
+    </div>`;
+
+    return cover;
+}
+
+
+/**
+ * Changes the CSS values of .customNavigation, .customNavbar, .customSecondaryNavbarContainer so that they accomodate the new height of the base navbar.
+ * @param {number} height the new height of the base navbar
+ */
+function adjustNavbarHeight(height) {
+    $(".customNavigation").css("height", `${height}px`);
+    $(".customNavbar").css("height", `${height}px`);
+    $(".customSecondaryNavbarContainer").css("bottom", `${height}px`);
+}
+
+
+/**
  * Generates the initial Arona to be added to the DOM.
  * @returns {html} arona in default hidden state
  */
@@ -254,9 +305,22 @@ function generateDrawItem(rarity, student) {
 // ======== Navbar functions ========
 /**
  * Plays the animation that renders in the navbar. Arona is changed from hidden to standby.
+ * @param {integer} delay Indicates the length of delay before the function is executed in milliseconds.
  */
-function navbarShow() {
-
+function navbarShow(delay=0) {
+    $(".customNavigationWrapper").delay(delay).animate({
+        bottom: `0px`
+    }, cssNavbarTransition1Time, function() {
+        $(".customNavbarButton").css("opacity", 0);
+        $(".customNavbarCover").animate({
+            opacity: 0
+        }, cssNavbarTransition2Time, function() {
+            $(".customNavbarCover").remove();
+            $(".customNavbarButton").animate({
+                opacity: 1
+            }, cssNavbarTransition3Time);;
+        })
+    });
 }
 
 
@@ -264,7 +328,11 @@ function navbarShow() {
  * Plays the animation that hides the navbar. arona is changed from standby to hidden.
  */
 function navbarHide() {
-
+    $(".customNavigationWrapper").animate({
+        bottom: `-${cssNavbarHeight}px`
+    }, cssNavbarTransition1Time, function() {
+        $(".customNavbar").after(generateNavbarCover());
+    });
 }
 
 
@@ -273,7 +341,7 @@ function navbarHide() {
  * Initializes Arona's position and make sure she is set to hidden.
  */
 function aronaInitialize() {
-
+    
 }
 
 
@@ -352,12 +420,17 @@ $(function() {
     // preload image resources
 
 
-    // generate navbar with conditional background blur
+    // generate navbar
+    let navbar = generateNavbar();
+    $(".customNavigationWrapper").html(navbar);
+    $(".customNavbar").after(generateNavbarCover());
+    adjustNavbarHeight(cssNavbarHeight);
+    $(".customNavigationWrapper").css("bottom", `-${cssNavbarHeight}px`);
 
+    // force navbar show on first load
+    navbarShow(2000);
 
     // initialize arona
-
-
     // append arona drag event listeners
 
 
