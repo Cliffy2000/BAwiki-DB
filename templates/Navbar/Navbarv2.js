@@ -8,10 +8,14 @@
 
 // ======== Variable list ========
 // CSS variables
-var cssNavbarHeight = 65;
-var cssNavbarTransition1Time = 500;
-var cssNavbarTransition2Time = 500;
-var cssNavbarTransition3Time = 500;
+var cssNavbarHeight = 70;
+
+// animation variables
+var animNavbarDelayTime = 1500;
+var animNavbarTransition1Time = 500;
+var animNavbarTransition2Time = 500;
+var animNavbarTransition3Time = 500;
+var animAronaStandbyTime = 625;
 
 // Constants
 var extraInfoClassName = "aronaDetailedInfoData";
@@ -37,6 +41,14 @@ var customNavbarSecondaryMenu = false;
 
 var aronaPreloaded = false;
 var aronaBannerPreloaded = false;
+
+// Cached states
+var navbarState = localStorage.getItem("BWikiNavbarState");
+if (!navbarState) {
+    navbarState = -1;
+}
+
+
 /** 
  * @type { "hidden" | "standby" | "dragging" | "falling" | "dizzy" } 
  * The later three are all considered active states
@@ -51,7 +63,7 @@ var aronaHiddenBaseImgPath;
 var aronaHiddenHeadwearImgPath;
 
 // Arona standby
-var aronaStandbyBaseImgPath;
+var aronaStandbyBaseImgPath = "https://patchwiki.biligame.com/images/ba/7/7a/jrnle39pxjjy4ekbgv4oh32oti0nbc9.png";
 var aronaStandbyExpDefaultImgPath;
 /** Blink expression for Arona in standby state */
 var aronaStandbyExpDiff1ImgPath;
@@ -154,7 +166,7 @@ function generateNavbar() {
     let navbar = `
         <div class="customNavigation">
             <div class="customNavbar">
-                <div class="customNavbarButton" data-secondary="home">
+                <div class="customNavbarButton" data-secondary="home" onclick="window.location.href='https://wiki.biligame.com/ba'">
                     <div class="customNavbarButtonIcon">
                         <img src="https://patchwiki.biligame.com/images/ba/e/e4/4nbwrpmailme8912lkvlzy9p3clf28h.svg">
                     </div>
@@ -200,12 +212,7 @@ function generateNavbar() {
 
         <div class="customSecondaryNavbarContainer">
             <div class="customSecondaryMenuContainer">
-                <div class="customSecondaryMenuGrid">
-                    <div class="customSecondaryMenuItem" data-button-index=1></div>
-                    <div class="customSecondaryMenuItem" data-button-index=2></div>
-                    <div class="customSecondaryMenuItem" data-button-index=3></div>
-                    <div class="customSecondaryMenuItem" data-button-index=4></div>
-                </div>
+                <div class="customSecondaryMenuGrid"></div>
             </div>
             <div class="customNavbarAronaAnchorContainer">
                 <div class="customNavbarAronaAnchor"></div>
@@ -252,7 +259,12 @@ function adjustNavbarHeight(height) {
  * @returns {html} arona in default hidden state
  */
 function generateInitialArona() {
+    let arona = `<div class="aronaContainer">
+        <img src="${aronaStandbyBaseImgPath}">
+        <div class="aronaContainerCover"></div>
+    </div>`;
 
+    return arona;
 }
 
 
@@ -305,20 +317,34 @@ function generateDrawItem(rarity, student) {
 // ======== Navbar functions ========
 /**
  * Plays the animation that renders in the navbar. Arona is changed from hidden to standby.
- * @param {integer} delay Indicates the length of delay before the function is executed in milliseconds.
+ * @param {"integer"} delay Indicates the length of delay before the function is executed in milliseconds.
  */
 function navbarShow(delay=0) {
     $(".customNavigationWrapper").delay(delay).animate({
         bottom: `0px`
-    }, cssNavbarTransition1Time, function() {
+    }, animNavbarTransition1Time, function() {
         $(".customNavbarButton").css("opacity", 0);
         $(".customNavbarCover").animate({
             opacity: 0
-        }, cssNavbarTransition2Time, function() {
+        }, animNavbarTransition2Time, function() {
             $(".customNavbarCover").remove();
+            let aronaAdded = false;
             $(".customNavbarButton").animate({
                 opacity: 1
-            }, cssNavbarTransition3Time);;
+            }, animNavbarTransition3Time, function() {
+                if (!aronaAdded) {
+                    aronaAdded = true;
+                    let arona = generateInitialArona();
+                    $(".customSecondaryNavbarContainer").after(arona);
+                    $(".aronaContainer").css({
+                        top: $(".customNavbarAronaAnchor").offset().top + $(".aronaContainer").height() - $(window).scrollTop(),
+                        left: $(".customNavbarAronaAnchor").offset().left - $(window).scrollLeft()
+                    });
+                    $(".aronaContainer").animate({
+                        top: $(".customNavbarAronaAnchor").offset().top - $(window).scrollTop()
+                    }, animAronaStandbyTime);
+                }
+            });
         })
     });
 }
@@ -330,26 +356,62 @@ function navbarShow(delay=0) {
 function navbarHide() {
     $(".customNavigationWrapper").animate({
         bottom: `-${cssNavbarHeight}px`
-    }, cssNavbarTransition1Time, function() {
+    }, animNavbarTransition1Time, function() {
         $(".customNavbar").after(generateNavbarCover());
     });
 }
 
 
-// ======== Arona functions ========
-/**
- * Initializes Arona's position and make sure she is set to hidden.
- */
-function aronaInitialize() {
-    
+function updateSecondaryNavbar() {
+    if (!customNavbarSecondaryMenu) {
+        return;
+    }
+
+    if (customNavbarSecondaryMenu === "catalog") {
+        $(".customSecondaryMenuGrid").html(`
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">1-1</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">1-2</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">1-3</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">1-4</div>
+        `);
+    }
+    else if (customNavbarSecondaryMenu === "intel") {
+        $(".customSecondaryMenuGrid").html(`
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">2-1</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">2-2</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">2-3</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">2-4</div>
+        `);
+    }
+    else if (customNavbarSecondaryMenu === "news") {
+        $(".customSecondaryMenuGrid").html(`
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">3-1</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">3-2</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">3-3</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">3-4</div>
+        `);
+    }
+    else if (customNavbarSecondaryMenu === "others") {
+        $(".customSecondaryMenuGrid").html(`
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">4-1</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">4-2</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">4-3</div>
+            <div class="customSecondaryMenuItem" onclick="window.location.href=''">4-4</div>
+        `);
+    }
 }
 
 
+// ======== Arona functions ========
 /**
- * Returns Arona to standby position and sets states accordingly.
+ * Adds Arona to anchor element, and shows move up animation by default.
  */
 function aronaSetStandby() {
+    let arona = `<div class="customNavbarAronaAnchor">
+        <img src="${aronaStandbyBaseImgPath}">
+    </div>`;
 
+    $(".customNavbarAronaAnchorContainer").html(arona);
 }
 
 
@@ -428,11 +490,98 @@ $(function() {
     $(".customNavigationWrapper").css("bottom", `-${cssNavbarHeight}px`);
 
     // force navbar show on first load
-    navbarShow(2000);
+    navbarShow(animNavbarDelayTime);
 
     // initialize arona
-    // append arona drag event listeners
 
+
+    // event listeners
+    $(window).on("resize", function() {
+        $("*").stop(true, true);
+
+        if ($(".aronaContainer").length === 0) {
+            $(".customSecondaryNavbarContainer").after(generateInitialArona());
+        }
+
+        $(".aronaContainer").css({
+            top: $(".customNavbarAronaAnchor").offset().top - $(window).scrollTop(),
+            left: $(".customNavbarAronaAnchor").offset().left - $(window).scrollLeft()
+        });
+
+        if (navbarState === 0) {
+            $(".customNavigationWrapper").css(bottom, `-${cssNavbarHeight}px`);
+            $(".customNavbar").after(generateNavbarCover());
+        }
+
+        else {
+            $(".customNavigationWrapper").css("bottom", "0px");
+            $(".customNavbarCover").remove();
+            $(".customNavbarButton").css("opacity", 1);
+        }
+    });
+
+
+    $(".customNavigationWrapper").on("click", ".customNavbarButton", function () {
+        if ($(this).data("secondary") === "home") {
+            return;
+        }
+
+        if (!customNavbarSecondaryMenu) {
+            customNavbarSecondaryMenu = $(this).data("secondary");
+            $(".customNavigation").before(`<div class="customNavigationScreenOverlay"></div>`);
+            if (typeof fullpage_api !== "undefined") {
+                fullpage_api.setAllowScrolling(false);
+            }
+
+            $(".customSecondaryMenuGrid").animate({
+                bottom: 0,
+                opacity: 1
+            }, 250);
+            
+            for (let i = 1; i <= 10; i += 1) {
+                setTimeout(() => {
+                    $(".customNavigationScreenOverlay").css({
+                        "background-color": `rgba(0, 0, 0, ${0.06*i})`,
+                        "backdrop-filter": `blur(${i}px)`
+                    }, 250);
+                    $(".customNavbar").css({ opacity: 1 - 0.01 * i });
+                }, i * 25);
+            }
+
+            updateSecondaryNavbar();
+        }
+
+        else if (customNavbarSecondaryMenu !== $(this).data("secondary")) {
+            customNavbarSecondaryMenu = $(this).data("secondary");
+            updateSecondaryNavbar();
+        }
+
+        else {
+            if (typeof fullpage_api !== "undefined") {
+                fullpage_api.setAllowScrolling(true);
+            }
+            customNavbarSecondaryMenu = false;
+
+            $(".customSecondaryMenuGrid").animate({
+                bottom: "-100%",
+                opacity: 0
+            }, 250);
+            
+            setTimeout(() => {
+                $(".customNavigationScreenOverlay").remove();
+            }, 250);
+            
+            for (let i = 1; i <= 10; i += 1) {
+                setTimeout(() => {
+                    $(".customNavigationScreenOverlay").css({
+                        "background-color": `rgba(0, 0, 0, ${0.06*(10-i)})`,
+                        "backdrop-filter": `blur(${10-i}px)`
+                    }, 250);
+                    $(".customNavbar").css({ opacity: 1 - 0.01*(10-i) });
+                }, i * 25);
+            }
+        }
+    });
 
     // ======== Main loop that iterates by frame ========
     setInterval(function() {

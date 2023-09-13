@@ -10,8 +10,8 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    opacity: 0;
-    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
 }
 
 .customNavigation {
@@ -94,7 +94,7 @@
 }
 
 .customSecondaryNavbarContainer {
-    height: 120px;
+    height: 150px;
     width: calc(min(100vw, 600px));
     position: absolute;
     left: 50%;
@@ -128,6 +128,7 @@
     background-color: #ffffff;
     border-radius: 4px;
     margin: 7px;
+    cursor: pointer;
 }
 
 .customNavbarAronaAnchorContainer {
