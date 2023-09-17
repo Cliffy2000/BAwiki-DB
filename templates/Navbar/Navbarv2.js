@@ -15,10 +15,12 @@ var animNavbarDelayTime = 1500;
 var animNavbarTransition1Time = 500;
 var animNavbarTransition2Time = 500;
 var animNavbarTransition3Time = 500;
+var animSecondaryNavbarTime = 250;
 var animAronaStandbyTime = 625;
 
 // Constants
 var extraInfoClassName = "aronaDetailedInfoData";
+var clickThreshold = 5;
 var FRAME_RATE = 60;
 var GRAVITY = 30;
 var BOUNCE = 1;
@@ -30,6 +32,7 @@ var [aronaVelocityX, aronaVelocityY] = [0, 0];
 var [aronaAccelerationX, aronaAccelerationY] = [0, 0];
 var [aronaDeltaX, aronaDeltaY] = [0, 0];
 
+var [mouseDownStartPosX, mouseDownStartPosY] = [0, 0];
 var [mouseDownPrevPosX, mouseDownNewPosY] = [0, 0];
 
 var [aronaScrollPrevX, aronaScrollPrevY] = [0, 0];
@@ -41,6 +44,9 @@ var customNavbarSecondaryMenu = false;
 
 var aronaPreloaded = false;
 var aronaBannerPreloaded = false;
+
+var aronaActive = false;
+var aronaDragging = false;
 
 // Cached states
 var navbarState = localStorage.getItem("BWikiNavbarState");
@@ -71,18 +77,18 @@ var aronaStandbyHands1ImgPath;
 var aronaStandbyHands2ImgPath;
 
 // Arona active
-var aronaActiveBaseImgPath;
-var aronaActiveExpDefaultImgPath;
+var aronaActiveBaseImgPath = "https://patchwiki.biligame.com/images/ba/0/08/iedj3m2i7zueqob14028oqbik0na3ft.png";
+var aronaActiveExpDefaultImgPath = "https://patchwiki.biligame.com/images/ba/0/07/85cdelmc92xqicizbvmowgo15muu5fg.png";
 /** Blink expression for Arona in active state */
-var aronaActiveExpDiff1ImgPath;
+var aronaActiveExpDiff1ImgPath = "https://patchwiki.biligame.com/images/ba/8/8e/65xzd7nyqubwltt8l5xnxf7o0njxpw5.png";
 /** Happy expression for Arona in active state */
-var aronaActiveExpDiff2ImgPath;
+var aronaActiveExpDiff2ImgPath = "https://patchwiki.biligame.com/images/ba/d/d4/r2341zln871k5q73w49tjyjyvdibkxj.png";
 /** Shocked expression for Arona in active state */
-var aronaActiveExpDiff3ImgPath;
+var aronaActiveExpDiff3ImgPath = "https://patchwiki.biligame.com/images/ba/8/81/tp6srb5hhqr6eed57e0v9ljdghb91r3.png";
 /** Dizzy expression for Arona in active state */
-var aronaActiveExpDiff4ImgPath;
-var aronaActiveTexture1ImgPath;
-var aronaActiveTexture2ImgPath;
+var aronaActiveExpDiff4ImgPath = "https://patchwiki.biligame.com/images/ba/a/ac/ee8ni7uawyuo6mbuyvr0z8tb5wf0hzb.png";
+var aronaActiveTexture1ImgPath = "https://patchwiki.biligame.com/images/ba/0/05/m74rvw7793ekgf6z2ewos269u58uprc.png";
+var aronaActiveTexture2ImgPath = "https://patchwiki.biligame.com/images/ba/5/52/e7k7fn0l4id2fonpzsfiqt2rczxdo21.png";
 
 var aronaBannerPool = {};
 var aronaBannerRates = {};
@@ -420,7 +426,24 @@ function aronaSetStandby() {
  * @param {*} event 
  */
 function aronaStartDrag(event) {
-    
+    aronaActive = true;
+    aronaDragging = true;
+    [aronaVelocityX, aronaVelocityY] = 0;
+    [aronaAccelerationX, aronaAccelerationY] = 0;
+
+    if (event.type === "touchstart") {
+        mouseDownStartPosX = event.originalEvent.touches[0].clientX;
+        mouseDownStartPosY = event.originalEvent.touches[0].clientY;
+    }
+    else {
+        mouseDownStartPosX = event.clientX;
+        mouseDownStartPosY = event.clientY;
+    }
+
+    mouseDownPrevPosX = mouseDownStartPosX;
+    mouseDownPrevPosY = mouseDownStartPosY;
+    aronaPosX = mouseDownPrevPosX - $aronaContainer.outerWidth() * aronaTouchOffsetX;
+    aronaPosY = mouseDownPrevPosY - $aronaContainer.outerHeight() * aronaTouchOffsetY;
 }
 
 /**
@@ -434,9 +457,10 @@ function aronaDrag(event) {
 
 /**
  * Function that is attached to the drag end event listeners. Determines whether Arona should hover for info, open umbrella or free fall.
+ * @param {*} event 
  */
-function aronaEndDrag() {
-
+function aronaEndDrag(event) {
+     
 }
 
 
@@ -536,7 +560,7 @@ $(function() {
             $(".customSecondaryMenuGrid").animate({
                 bottom: 0,
                 opacity: 1
-            }, 250);
+            }, animSecondaryNavbarTime);
             
             for (let i = 1; i <= 10; i += 1) {
                 setTimeout(() => {
@@ -545,7 +569,7 @@ $(function() {
                         "backdrop-filter": `blur(${i}px)`
                     }, 250);
                     $(".customNavbar").css({ opacity: 1 - 0.01 * i });
-                }, i * 25);
+                }, i * (animSecondaryNavbarTime/10));
             }
 
             updateSecondaryNavbar();
@@ -565,11 +589,11 @@ $(function() {
             $(".customSecondaryMenuGrid").animate({
                 bottom: "-100%",
                 opacity: 0
-            }, 250);
+            }, animSecondaryNavbarTime);
             
             setTimeout(() => {
                 $(".customNavigationScreenOverlay").remove();
-            }, 250);
+            }, animSecondaryNavbarTime);
             
             for (let i = 1; i <= 10; i += 1) {
                 setTimeout(() => {
@@ -578,10 +602,14 @@ $(function() {
                         "backdrop-filter": `blur(${10-i}px)`
                     }, 250);
                     $(".customNavbar").css({ opacity: 1 - 0.01*(10-i) });
-                }, i * 25);
+                }, i * (animSecondaryNavbarTime/10));
             }
         }
     });
+
+    $(".aronaContainer").on("mousedown", aronaStartDrag);
+    $(window).on("mousemove", aronaDrag);
+    $(window).on("mouseup", aronaEndDrag);
 
     // ======== Main loop that iterates by frame ========
     setInterval(function() {
