@@ -444,6 +444,19 @@ function aronaStartDrag(event) {
     mouseDownPrevPosY = mouseDownStartPosY;
     aronaPosX = mouseDownPrevPosX - $aronaContainer.outerWidth() * aronaTouchOffsetX;
     aronaPosY = mouseDownPrevPosY - $aronaContainer.outerHeight() * aronaTouchOffsetY;
+
+    $(".aronaContainer").html(`
+        <img src="${aronaActiveBaseImgPath}">
+        <img src="${aronaActiveExpDefaultImgPath}">
+        <img src="${aronaActiveTexture1ImgPath}">
+        <div class="aronaContainer"></div>
+    `);
+
+    $(".aronaContainer").css({
+        "position": fixed,
+        "left": aronaPosX + "px",
+        "top": aronaPoxY + "px"
+    })
 }
 
 /**
@@ -451,7 +464,25 @@ function aronaStartDrag(event) {
  * @param {*} event 
  */
 function aronaDrag(event) {
+    if (!aronaDragging) return;
 
+    let mouseDownNewPosX, mouseDownNewPosY;
+
+    if (event.type === "touchmove") {
+        mouseDownNewPosX = event.originalEvent.touches[0].clientX;
+        mouseDownNewPosY = event.originalEvent.touches[0].clientY;
+    }
+    else {
+        mouseDownNewPosX = event.clientX;
+        mouseDownNewPosY = event.clientY;
+    }
+
+    // TODO: check for detailed info
+
+    mouseDownNewPosX = Math.max(0, Math.min($(window).width(), mouseDownNewPosX));
+    mouseDownNewPosY = Math.max(0, Math.min($(window).height(), mouseDownNewPosY));
+
+    
 }
 
 
