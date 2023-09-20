@@ -482,7 +482,12 @@ function aronaDrag(event) {
     mouseDownNewPosX = Math.max(0, Math.min($(window).width(), mouseDownNewPosX));
     mouseDownNewPosY = Math.max(0, Math.min($(window).height(), mouseDownNewPosY));
 
-    
+    aronaVelocityX = (mouseDownNewPosX - mouseDownPrevPosX) / 2;
+    aronaVelocityY = (mouseDownNewPosY - mouseDownPrevPosY) / 2;
+    aronaDeltaX += mouseDownNewPosX - mouseDownPrevPosX;
+    aronaDeltaY += mouseDownNewPosY - mouseDownPrevPosY;
+    mouseDownPrevPosX = mouseDownNewPosX;
+    mouseDownPrevPosY = mouseDownNewPosY;
 }
 
 
@@ -491,7 +496,22 @@ function aronaDrag(event) {
  * @param {*} event 
  */
 function aronaEndDrag(event) {
-     
+    aronaDragging = false;
+
+    $(".aronaContainer").html(`
+        <img src="${aronaStandbyBaseImgPath}">
+        <div class="aronaContainerCover"></div>
+    `);
+    $(".aronaContainer").css("pointer-events", "auto");
+    
+    let mouseDownNewPosX, mouseDownNewPosY;
+    mouseDownNewPosX = Math.max(0, Math.min($(window).width(), mouseDownNewPosX));
+    mouseDownNewPosY = Math.max(0, Math.min($(window).height(), mouseDownNewPosY));
+
+    if ((Math.abs(mouseDownNewPosX - mouseDownPrevPosX) < 5) && (Math.abs(mouseDownNewPosY - mouseDownPrevPosY) < 5)) {
+        // TODO: show or hide navbar accordingly
+
+    }
 }
 
 
@@ -499,7 +519,33 @@ function aronaEndDrag(event) {
  * Limits Arona's position to be within the borders. Handles bounces and edge cases for off screen mouse positions.
  */
 function aronaConstrainPosition() {
+    if (aronaPosX < 0 - $aronaContainer.outerWidth() * aronaTouchOffsetX) {
+        aronaPosX = 0 - $aronaContainer.outerWidth() * aronaTouchOffsetX - aronaPosX;
+        aronaVelocityX *= -BOUNCE;
+        aronaAccelerationX *= -BOUNCE;
+    }
 
+    else if (aronaPosX > $(window).width() - $aronaContainer.outerWidth() * (1 - aronaTouchOffsetX)) {
+        aronaPosX = 2 * ($(window).width() - $aronaContainer.outerWidth() * (1 - aronaTouchOffsetX)) - aronaPosX;
+        aronaVelocityX *= -BOUNCE;
+        aronaAccelerationX *= -BOUNCE;
+    }
+
+
+    if (aronaPosY >= $(window).height() + 1500) {
+        let anchorPosition = $(".customNavbarAronaAnchor").offset();
+        aronaPosX = anchorPosition.left;
+        aronaPosY = anchorPosition.top;
+        aronaVelocityY = 0;
+        aronaAccelerationY = 0;
+        aronaGrounded = true;
+    }
+
+    else if (aronaPosY < 0 - $aronaContainer.outerHeight() * aronaTouchOffsetY) {
+        aronaPosY = 0 - $aronaContainer.outerHeight() * aronaTouchOffsetY - aronaPosY;
+        aronaVelocityY *= -BOUNCE;
+        aronaAccelerationY *= -BOUNCE;
+    }
 }
 
 
