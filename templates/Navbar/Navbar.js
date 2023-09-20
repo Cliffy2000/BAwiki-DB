@@ -292,7 +292,7 @@ $(function () {
         if (aronaPosY >= $(window).height() + 1500) {
             let anchorPosition = $(".customNavbarAronaAnchor").offset();
             aronaPosX = anchorPosition.left;
-            aronaPosY = anchorPosition.top;
+            aronaPosY = anchorPosition.top; 
             aronaVelocityY = 0;
             aronaAccelerationY = 0;
             aronaGrounded = true;
